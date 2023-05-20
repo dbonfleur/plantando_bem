@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "BsRyiHvn1LcpTupS1vTYUSlNFcqKDINzuKxM4df/Yv/Ekjh7HJJw0CUCbvfbaYUpRrySYsQtY2qqW9dQOupZlA==",
+  "success": true,
+  "projectFilePath": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\plantando_bem.RazorPages.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\danib\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
