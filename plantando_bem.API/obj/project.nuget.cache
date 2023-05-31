@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PZVWQKU4L6XDG/Z8GYiCb2a6zIc+ayTnQiuzdR6Eoj705iXZ3lRp9VXkTbxLpq0In9s7lcGtnzmiZmBUBd8/tQ==",
+  "dgSpecHash": "YbMabUALqcKIaI6gfheU6waYe7L4adi2P/K1yORxahG1t68e298Al0latpgmW0GeeJV8LT5yRuH3xn8Ppmd41w==",
   "success": true,
-  "projectFilePath": "D:\\GitHub\\plantando_bem\\plantando_bem.API\\plantando_bem.API.csproj",
+  "projectFilePath": "d:\\GitHub\\plantando_bem\\plantando_bem.API\\plantando_bem.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\danib\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\danib\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.5\\microsoft.aspnetcore.openapi.7.0.5.nupkg.sha512",

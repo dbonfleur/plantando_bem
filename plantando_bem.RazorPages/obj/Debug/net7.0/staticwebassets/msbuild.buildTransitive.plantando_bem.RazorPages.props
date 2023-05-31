@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\plantando_bem.RazorPages.props" />
+</Project>

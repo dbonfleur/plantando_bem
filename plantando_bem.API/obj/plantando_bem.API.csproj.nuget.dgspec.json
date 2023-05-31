@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\GitHub\\plantando_bem\\plantando_bem.API\\plantando_bem.API.csproj": {}
+    "d:\\GitHub\\plantando_bem\\plantando_bem.API\\plantando_bem.API.csproj": {}
   },
   "projects": {
-    "D:\\GitHub\\plantando_bem\\plantando_bem.API\\plantando_bem.API.csproj": {
+    "d:\\GitHub\\plantando_bem\\plantando_bem.API\\plantando_bem.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GitHub\\plantando_bem\\plantando_bem.API\\plantando_bem.API.csproj",
+        "projectUniqueName": "d:\\GitHub\\plantando_bem\\plantando_bem.API\\plantando_bem.API.csproj",
         "projectName": "plantando_bem.API",
-        "projectPath": "D:\\GitHub\\plantando_bem\\plantando_bem.API\\plantando_bem.API.csproj",
+        "projectPath": "d:\\GitHub\\plantando_bem\\plantando_bem.API\\plantando_bem.API.csproj",
         "packagesPath": "C:\\Users\\danib\\.nuget\\packages\\",
-        "outputPath": "D:\\GitHub\\plantando_bem\\plantando_bem.API\\obj\\",
+        "outputPath": "d:\\GitHub\\plantando_bem\\plantando_bem.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -49,6 +49,8 @@
               "version": "[7.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.5, )"
             },

@@ -1,0 +1,95 @@
+﻿@page
+@model RegisterModel
+<style>
+    .frm-label {
+        opacity: .65;
+        transform: scale(.85) translateY(-0.5rem) translateX(0.15rem);
+    }
+</style>
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <img src="~/img/logo.jpg" alt="Logo Plantando Bem" style="display:flex; justify-content:center; margin:auto;"/>
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <hr/>
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <div class="form-floating mb-3">
+                <input asp-for="UserModel.Nome" class="form-control" autocomplete="username" aria-required="true"/>
+                <label asp-for="UserModel.Nome">Nome</label>
+                <span asp-validation-for="UserModel.Nome" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true"/>
+                <label asp-for="Input.Password">Senha</label>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true"/>
+                <label asp-for="Input.ConfirmPassword">Confirme a Senha</label>
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true"/>
+                <label asp-for="Input.Email">Email</label>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <label class="frm-label" asp-for="IdEstado">Estado</label>
+                <select asp-for="IdEstado" id="estadoSelect" class="form-control" aria-required="true">
+                    <option value="" selected></option>
+                    @foreach (var estado in Model.Estados)
+                    {
+                        <option value="@estado.Id">@estado.Nome</option>
+                    }
+                </select>
+                <span asp-validation-for="IdEstado" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <label class="frm-label" asp-for="IdCidade">Cidade</label>
+                <select asp-for="IdCidade" id="cidadeSelect" class="form-control" aria-required="true" disabled></select>
+                <span asp-validation-for="IdCidade" class="text-danger"></span>
+            </div>
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-success">Cadastrar</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<script>
+    document.getElementById('estadoSelect').addEventListener('change', function() {
+        var estadoId = this.value;
+        getCidadesByEstado(estadoId);
+    });
+
+    function getCidadesByEstado(estadoId) {
+        var cidadeSelect = document.getElementById('cidadeSelect');
+        cidadeSelect.innerHTML = ''; // Limpar as opções existentes
+
+        if (estadoId !== '') {
+            // Fazer solicitação à API do IBGE para obter as cidades
+            var url = 'https://servicodados.ibge.gov.br/api/v1/localidades/estados/' + estadoId + '/municipios';
+            fetch(url)
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(cidades) {
+                    // Preencher o select com as cidades obtidas
+                    cidades.forEach(function(cidade) {
+                        var option = document.createElement('option');
+                        option.value = cidade.id;
+                        option.text = cidade.nome;
+                        cidadeSelect.appendChild(option);
+                    });
+
+                    cidadeSelect.disabled = false; // Habilitar o select de cidades
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+        } else {
+            cidadeSelect.disabled = true; // Desabilitar o select de cidades se nenhum estado for selecionado
+        }
+    }
+</script>
