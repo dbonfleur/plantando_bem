@@ -2,31 +2,26 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using plantando_bem.RazorPages.Models;
 using plantando_bem.RazorPages.Models.Localidades;
-
+using plantando_bem.RazorPages.Areas.Identity.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace plantando_bem.RazorPages.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
+        private readonly IdentityDataContext _context;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IUserStore<IdentityUser> _userStore;
@@ -38,7 +33,8 @@ namespace plantando_bem.RazorPages.Areas.Identity.Pages.Account
             IUserStore<IdentityUser> userStore,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IdentityDataContext context)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -46,16 +42,20 @@ namespace plantando_bem.RazorPages.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
         }
 
         [BindProperty]
         public InputModel Input { get; set; }
         [BindProperty]
-        public UserModel UserModel { get; set; } = new();
+        public UserModel Usuario { get; set; } = new();
         [BindProperty]
         public List<EstadoModel> Estados { get; set; } = new();
         public CidadeModel Cidade { get; set; }
+        public EstadoModel Estado { get; set; }
+        [BindProperty]
         public int IdEstado { get; set; }
+        [BindProperty]
         public int IdCidade { get; set; }
         public string ReturnUrl { get; set; }
 
@@ -123,7 +123,116 @@ namespace plantando_bem.RazorPages.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+                using (var httpCliente = new HttpClient())
+                {
+                    string url = $"https://servicodados.ibge.gov.br/api/v1/localidades/estados/{IdEstado}";
+                    var response = await httpCliente.GetAsync(url);
+                    
+                    var content = await response.Content.ReadAsStringAsync();
+                    Estado = JsonConvert.DeserializeObject<EstadoModel>(content)!;
+                }
+
+                var existRegiao = _context.Regiao.FirstOrDefaultAsync(k => k.Id == Estado.Regiao.Id).Result;
+
+                if(existRegiao == null) {
+                    await _context.AddAsync(Estado.Regiao);
+                } else {
+                    _context.Entry(existRegiao).State = EntityState.Detached;
+                }
+
+                var existEstado = _context.Estado.FirstOrDefaultAsync(k => k.Id == Estado.Id).Result;
+
+                if(existEstado == null) {
+                    Estado.IdRegiao = Estado.Regiao.Id;
+                    Estado.Regiao = null;
+                    await _context.AddAsync(Estado);
+                } else {
+                    _context.Entry(existEstado).State = EntityState.Detached;
+                }
                 
+                using (var httpCliente = new HttpClient())
+                {
+                    string url = $"https://servicodados.ibge.gov.br/api/v1/localidades/municipios/{IdCidade}";
+                    var response = await httpCliente.GetAsync(url);
+                    
+                    var content = await response.Content.ReadAsStringAsync();
+                    Cidade = JsonConvert.DeserializeObject<CidadeModel>(content)!;
+                }
+
+                var existUF = _context.UF.FirstOrDefaultAsync(k => k.Id == Cidade.Microrregiao.Mesorregiao.UF.Id).Result;
+                
+                if(existUF == null) {
+                    Cidade.Microrregiao.Mesorregiao.UF.IdRegiao = Cidade.Microrregiao.Mesorregiao.UF.Regiao.Id;
+                    Cidade.Microrregiao.Mesorregiao.UF.Regiao = null;
+                    await _context.AddAsync(Cidade.Microrregiao.Mesorregiao.UF);
+                } else {
+                    _context.Entry(existUF).State = EntityState.Detached;
+                }
+
+                var existMesso = _context.Mesorregiao.FirstOrDefaultAsync(k => k.Id == Cidade.Microrregiao.Mesorregiao.Id).Result;
+                
+                if(existMesso == null) {
+                    Cidade.Microrregiao.Mesorregiao.IdUF = Cidade.Microrregiao.Mesorregiao.UF.Id;
+                    Cidade.Microrregiao.Mesorregiao.UF = null;
+                    await _context.AddAsync(Cidade.Microrregiao.Mesorregiao);
+                } else {
+                    _context.Entry(existMesso).State = EntityState.Detached;
+                }
+
+                var existMicro = _context.Microrregiao.FirstOrDefaultAsync(k => k.Id == Cidade.Microrregiao.Id).Result;
+                
+                if(existMicro == null) {
+                    Cidade.Microrregiao.IdMessorregiao = Cidade.Microrregiao.Mesorregiao.Id;
+                    Cidade.Microrregiao.Mesorregiao = null;
+                    await _context.AddAsync(Cidade.Microrregiao);
+                } else {
+                    _context.Entry(existMicro).State = EntityState.Detached;
+                }
+
+                var existRegInt = _context.RegiaoIntermediaria.FirstOrDefaultAsync(k => k.Id == Cidade.RegiaoImediata.RegiaoIntermediaria.Id).Result;
+                
+                if(existRegInt == null) {
+                    Cidade.RegiaoImediata.RegiaoIntermediaria.IdUF = Cidade.RegiaoImediata.RegiaoIntermediaria.UF.Id;
+                    Cidade.RegiaoImediata.RegiaoIntermediaria.UF = null;
+
+                    await _context.AddAsync(Cidade.RegiaoImediata.RegiaoIntermediaria);
+                } else {
+                    _context.Entry(existRegInt).State = EntityState.Detached;
+                }
+
+                var existRegIme = _context.RegiaoImediata.FirstOrDefaultAsync(k => k.Id == Cidade.RegiaoImediata.Id).Result;
+                
+                if(existRegIme == null) {
+                    Cidade.RegiaoImediata.IdRegiaoInt = Cidade.RegiaoImediata.RegiaoIntermediaria.Id;
+                    Cidade.RegiaoImediata.RegiaoIntermediaria = null;
+
+                    await _context.AddAsync(Cidade.RegiaoImediata);
+                } else {
+                    _context.Entry(existRegIme).State = EntityState.Detached;
+                }
+
+                var existCidade = _context.Cidade.FirstOrDefaultAsync(k => k.Id == Cidade.Id).Result;
+                
+                if(existCidade == null) {
+                    Cidade.IdRegiaoImediata = Cidade.RegiaoImediata.Id;
+                    Cidade.RegiaoImediata = null;
+                    Cidade.IdMicrorregiao = Cidade.Microrregiao.Id;
+                    Cidade.Microrregiao = null;
+
+                    await _context.AddAsync(Cidade);
+                } else {
+                    _context.Entry(existCidade).State = EntityState.Detached;
+                }
+
+                try {
+                    Usuario.IdCidade = Cidade.Id;
+                    Usuario.IdEstado = Estado.Id;
+
+                    await _context.AddAsync(Usuario);
+                    await _context.SaveChangesAsync();
+                } catch(DbUpdateException exp) {
+                    return Page();
+                }
 
                 var user = CreateUser();
 

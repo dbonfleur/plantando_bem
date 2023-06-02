@@ -1,7 +1,6 @@
 D:\GitHub\plantando_bem\plantando_bem.RazorPages\bin\Debug\net7.0\appsettings.Development.json
 D:\GitHub\plantando_bem\plantando_bem.RazorPages\bin\Debug\net7.0\appsettings.json
 D:\GitHub\plantando_bem\plantando_bem.RazorPages\bin\Debug\net7.0\plantando_bem.RazorPages.staticwebassets.runtime.json
-D:\GitHub\plantando_bem\plantando_bem.RazorPages\bin\Debug\net7.0\app.db
 D:\GitHub\plantando_bem\plantando_bem.RazorPages\bin\Debug\net7.0\plantando_bem.RazorPages.exe
 D:\GitHub\plantando_bem\plantando_bem.RazorPages\bin\Debug\net7.0\plantando_bem.RazorPages.deps.json
 D:\GitHub\plantando_bem\plantando_bem.RazorPages\bin\Debug\net7.0\plantando_bem.RazorPages.runtimeconfig.json
@@ -312,3 +311,4 @@ D:\GitHub\plantando_bem\plantando_bem.RazorPages\obj\Debug\net7.0\refint\plantan
 D:\GitHub\plantando_bem\plantando_bem.RazorPages\obj\Debug\net7.0\plantando_bem.RazorPages.pdb
 D:\GitHub\plantando_bem\plantando_bem.RazorPages\obj\Debug\net7.0\plantando_bem.RazorPages.genruntimeconfig.cache
 D:\GitHub\plantando_bem\plantando_bem.RazorPages\obj\Debug\net7.0\ref\plantando_bem.RazorPages.dll
+D:\GitHub\plantando_bem\plantando_bem.RazorPages\bin\Debug\net7.0\app.db
