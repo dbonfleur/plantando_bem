@@ -2,25 +2,210 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-<ul class="navbar-nav">
+<style>
+    .material-icons-round.md-36 { font-size: 36px; }
+    .material-icons-round.md-28 { font-size: 28px; }
+    .material-icons-round.verde { color: #009900; }
+    .material-icons-round.branco { color: #FFFFFF; }
+    .col-md-2 {
+        border-right: 1px ridge #009900;
+    }
+    .borda-verde {
+        line-height: 15px; /* Reduz o espaçamento interno */
+        height: 20%;
+        border: 2px dashed #009900; /* Define a borda pontilhada */
+    }
+    .fnd-verd-claro {
+        background-color: rgba(0, 153, 0, 0.21);
+    }
+    .fnd-verd-claro-2 {
+        background-color: rgba(0, 255, 0, 0.28);
+    }
+    .fnd-selecionado {
+        background-color: rgba(0, 153, 0, 0.72);
+    }
+    .texto-branco {
+        color: #FFFFFF;
+    }
+</style>
+
+<script>
+    document.onreadystatechange = function() {
+        if (document.readyState === "interactive") {
+            var a = [], li = [], td = [], ico = [];
+            var elementoAnterior;
+            
+            for(var i = 1; i <= 5; i++) {
+                a[i-1] = document.getElementById("a" + i);
+                li[i-1] = document.getElementById("li" + i);
+                td[i-1] = document.getElementById("td" + i);
+                ico[i-1] = document.getElementById("ico" + i);
+            }
+
+            elementoAnterior = localStorage.getItem("anterior");
+
+            if(elementoAnterior) {
+                li[elementoAnterior-1].classList.remove("fnd-selecionado");
+                if(elementoAnterior % 2 != 0) {
+                    li[elementoAnterior-1].classList.add("fnd-verd-claro");
+                } else {
+                    li[elementoAnterior-1].classList.add("fnd-verd-claro2");
+                }
+
+                td[elementoAnterior-1].classList.remove("texto-branco");
+
+                if(elementoAnterior == 2) {
+                    ico[elementoAnterior-1].src = "/img/carrot_verde.png";
+                } else {
+                    ico[elementoAnterior-1].classList.remove("branco");
+                    ico[elementoAnterior-1].classList.add("verde");
+                }
+            }
+
+            elementoAtual = localStorage.getItem("atual");
+
+            if(elementoAtual == null)
+                elementoAtual = 1;
+
+            if(elementoAtual) {
+                
+                if(elementoAtual % 2 != 0) {
+                    li[elementoAtual-1].classList.remove("fnd-verd-claro");
+                } else {
+                    li[elementoAtual-1].classList.remove("fnd-verd-claro2");
+                }
+                li[elementoAtual-1].classList.add("fnd-selecionado");
+
+                td[elementoAtual-1].classList.add("texto-branco");
+
+                if(elementoAtual == 2) {
+                    ico[elementoAtual-1].src = "/img/carrot_branca.png";
+                } else {
+                    ico[elementoAtual-1].classList.remove("verde");
+                    ico[elementoAtual-1].classList.add("branco");
+                }
+
+            }
+
+            for(var i = 1; i <= 5; i++) {
+
+                (function(index) {
+
+                    a[index-1].addEventListener("click", function() {
+
+                        if(elementoAnterior == null) {
+                            elementoAnterior = 1;
+                            localStorage.setItem("anterior", JSON.stringify(elementoAnterior));
+                        } else {
+                            localStorage.setItem("anterior", elementoAtual);
+                        }
+
+                        localStorage.setItem("atual", JSON.stringify(index));
+                    });
+                })(i);
+            }
+        }
+    };
+</script>
+
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
-    </li>
-    <li class="nav-item">
-        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post" >
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-        </form>
-    </li>
+    <div class="col-md-2" style="padding-left: 0px;padding-right: 0px;">
+        <nav class="sidebar">
+            <ul class="navbar-nav">
+                <li class="nav-item d-flex align-items-center" style="padding-bottom: 20%;">
+                    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                         <table style="margin-left: 20px; margin-top: 20px;">
+                            <tr>
+                                <th>
+                                    <span class="material-icons-round md-36 verde">account_circle</span>
+                                </th>
+                                <th style="padding-left: 10px;">
+                                    @User.Identity?.Name, Bem Vindo!
+                                </th>
+                            </tr>
+                        </table>
+                    </a>
+                </li>
+                <li id="li1" class="nav-item borda-verde fnd-verd-claro">
+                    <a id="a1" class="nav-link text-dark" asp-area="" asp-page="/Calendario/CalendarioPrincipal">
+                        <table style="margin-left: 5%;">
+                            <tr>
+                                <td id="td1" style="width: 182px;">
+                                    Calendário Principal
+                                </td>
+                                <td>
+                                    <span id="ico1" class="material-icons-round md-28 verde">event_available</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </a>
+                </li>
+                <li id="li2" class="nav-item borda-verde fnd-verd-claro-2">
+                    <a id="a2" class="nav-link text-dark" asp-area="" asp-page="/Jardim/MeuJardim">
+                        <table style="margin-left: 5%;">
+                            <tr>
+                                <td id="td2" style="width: 180px;">
+                                    Meu Jardim
+                                </td>
+                                <td>
+                                    <img id="ico2" src="~/img/carrot_verde.png" alt="carrot_verde" style="width: 30px; height: 30px;"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </a>
+                </li>
+                <li id="li3" class="nav-item borda-verde fnd-verd-claro">
+                    <a id="a3" class="nav-link text-dark" asp-area="" asp-page="/Irrigacao/Irrigacoes">
+                        <table style="margin-left: 5%;">
+                            <tr>
+                                <td id="td3" td style="width: 142px;">
+                                    Irrigação do Jardim
+                                </td>
+                                <td style="padding-left: 40px;">
+                                    <span id="ico3" class="material-icons-round md-28 verde">local_drink</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </a>
+                </li>
+                <li id="li4" class="nav-item borda-verde fnd-verd-claro-2">
+                    <a id="a4" class="nav-link text-dark" asp-area="" asp-page="/Identifica/IdentificaPlanta">
+                        <table style="margin-left: 5%;">
+                            <tr>
+                                <td id="td4" style="width: 142px;">
+                                    Identificar Planta
+                                </td>
+                                <td style="padding-left: 40px;">
+                                    <span id="ico4" class="material-icons-round md-28 verde">image</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </a>
+                </li>
+                <li id="li5" class="nav-item borda-verde fnd-verd-claro">
+                    <a id="a5" class="nav-link text-dark" asp-area="" asp-page="/Pragas/InformacoesPragas">
+                        <table style="margin-left: 5%;">
+                            <tr>
+                                <td id="td5" style="width: 142px;">
+                                    Informações Pragas
+                                </td>
+                                <td style="padding-left: 40px;">
+                                    <span id="ico5" class="material-icons-round md-28 verde">bug_report</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </a>
+                </li>
+                <li class="nav-item borda-verde fnd-verd-claro">
+                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post" >
+                        <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+        <div class="my-div">
+            <img src="~/img/logo.jpg" alt="Logo Plantando Bem" style="width: 200px; height: auto; margin-left: 30px;"/>
+        </div>
+    </div>
 }
-else
-{
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
-}
-</ul>

@@ -11,7 +11,7 @@ using plantando_bem.RazorPages.Areas.Identity.Data;
 namespace plantando_bem.RazorPages.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-    [Migration("20230602130829_CreateMigration")]
+    [Migration("20230604143150_CreateMigration")]
     partial class CreateMigration
     {
         /// <inheritdoc />
@@ -379,7 +379,7 @@ namespace plantando_bem.RazorPages.Migrations
 
             modelBuilder.Entity("plantando_bem.RazorPages.Models.UserModel", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 

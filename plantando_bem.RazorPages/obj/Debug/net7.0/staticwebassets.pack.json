@@ -13,6 +13,14 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\img\\carrot_branca.png",
+      "PackagePath": "staticwebassets\\img\\carrot_branca.png"
+    },
+    {
+      "Id": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\img\\carrot_verde.png",
+      "PackagePath": "staticwebassets\\img\\carrot_verde.png"
+    },
+    {
       "Id": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\img\\logo.jpg",
       "PackagePath": "staticwebassets\\img\\logo.jpg"
     },

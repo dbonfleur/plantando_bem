@@ -1,6 +1,10 @@
 ﻿@page
 @model LoginModel
 
+<script>
+    localStorage.clear();
+</script>
+
 <div class="row">
     <div>
         <img src="~/img/logo.jpg" alt="Logo Plantando Bem" style="display:flex; justify-content:center; margin:auto;"/>
@@ -13,9 +17,9 @@
                 <hr />
                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                 <div class="form-floating mb-3">
-                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                    <label asp-for="Input.Email" class="form-label">Email</label>
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    <input asp-for="Input.Name" class="form-control" autocomplete="username" aria-required="true" />
+                    <label asp-for="Input.Name" class="form-label">Nome</label>
+                    <span asp-validation-for="Input.Name" class="text-danger"></span>
                 </div>
                 <div class="form-floating mb-3">
                     <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
@@ -24,8 +28,7 @@
                 </div>
                 <div class="checkbox mb-3">
                     <label asp-for="Input.RememberMe" class="form-label">
-                        <input class="form-check-input" asp-for="Input.RememberMe" />
-                        @Html.DisplayNameFor(m => m.Input.RememberMe)
+                        <input class="form-check-input" asp-for="Input.RememberMe" /> Lembrar de mim?
                     </label>
                 </div>
                 <div>

@@ -8,6 +8,7 @@ namespace plantando_bem.RazorPages.Models
         public string? Nome { get; set; }
         public int? IdEstado { get; set; }
         public int? IdCidade { get; set; }
+        public int? IdNetUser { get; set; }
         public EstadoModel? Estado { get; set; }
         public CidadeModel? Cidade { get; set; }
     }
