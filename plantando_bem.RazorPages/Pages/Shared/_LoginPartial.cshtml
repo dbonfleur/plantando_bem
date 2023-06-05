@@ -7,6 +7,7 @@
     .material-icons-round.md-28 { font-size: 28px; }
     .material-icons-round.verde { color: #009900; }
     .material-icons-round.branco { color: #FFFFFF; }
+    .material-icons-round.vermelho { color: #8e0a0a; }
     .col-md-2 {
         border-right: 1px ridge #009900;
     }
@@ -14,6 +15,14 @@
         line-height: 15px; /* Reduz o espaçamento interno */
         height: 20%;
         border: 2px dashed #009900; /* Define a borda pontilhada */
+    }
+    .borda-verm {
+        line-height: 15px; /* Reduz o espaçamento interno */
+        height: 20%;
+        border: 2px dashed #990000; /* Define a borda pontilhada */
+    }
+    .fnd-verm-claro {
+        background-color: rgba(219, 22, 22, 0.141);
     }
     .fnd-verd-claro {
         background-color: rgba(0, 153, 0, 0.21);
@@ -197,15 +206,25 @@
                         </table>
                     </a>
                 </li>
-                <li class="nav-item borda-verde fnd-verd-claro">
-                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post" >
-                        <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-                    </form>
+                <li class="nav-item borda-verm fnd-verm-claro">
+                    <table style="margin-left: 5%;">
+                        <tr>
+                            <td style="width: 142px;">
+                                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post" >
+                                    <button  type="submit" class="nav-link btn btn-link text-dark">Deslogar</button>
+                                </form>
+                            </td>
+                            <td style="padding-left: 40px;">
+                                <span class="material-icons-round md-28 vermelho">person_remove</span>
+                            </td>
+                        </tr>
+                    </table>
+
                 </li>
             </ul>
         </nav>
         <div class="my-div">
-            <img src="~/img/logo.jpg" alt="Logo Plantando Bem" style="width: 200px; height: auto; margin-left: 30px;"/>
+            <img src="~/img/logo.jpg" alt="Logo Plantando Bem" style="width: 200px; height: auto; margin-left: 30px; margin-top: 30px;"/>
         </div>
     </div>
 }

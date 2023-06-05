@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DdLvIqWsUuMxSedA8jZouXHrn2In4YhPDpu+SjsLd/IDcYYovdtkKl51rROkqmnB0ZL23bqIf3KVzYx0/1Vv8w==",
+  "dgSpecHash": "6sbpSHWiRe/eSyS1xOH6+EIVAQfvE3xrt/fyfPeZNvKrvOWOSaAZnegegba5Qm6eZPnDRozD/bKFpV45McVWuA==",
   "success": true,
-  "projectFilePath": "d:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\plantando_bem.RazorPages.csproj",
+  "projectFilePath": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\plantando_bem.RazorPages.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\danib\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\danib\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

@@ -16,6 +16,7 @@ public class IdentityDataContext : IdentityDbContext<IdentityUser>
     public DbSet<MesorregiaoModel>? Mesorregiao { get; set; }
     public DbSet<EstadoModel>? Estado { get; set; }
     public DbSet<CidadeModel>? Cidade { get; set; }
+    public DbSet<UserModel>? User { get; set; }
     private readonly IConfiguration _configuration;
     public IdentityDataContext(DbContextOptions<IdentityDataContext> options, IConfiguration configuration)
         : base(options)

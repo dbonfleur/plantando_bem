@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\plantando_bem.RazorPages.csproj": {}
+    "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\plantando_bem.RazorPages.csproj": {}
   },
   "projects": {
-    "d:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\plantando_bem.RazorPages.csproj": {
+    "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\plantando_bem.RazorPages.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\plantando_bem.RazorPages.csproj",
+        "projectUniqueName": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\plantando_bem.RazorPages.csproj",
         "projectName": "plantando_bem.RazorPages",
-        "projectPath": "d:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\plantando_bem.RazorPages.csproj",
+        "projectPath": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\plantando_bem.RazorPages.csproj",
         "packagesPath": "C:\\Users\\danib\\.nuget\\packages\\",
-        "outputPath": "d:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\obj\\",
+        "outputPath": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
