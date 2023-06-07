@@ -1,11 +1,32 @@
 @page
 @model plantando_bem.RazorPages.Pages.Jardim.MeuJardim
 @{
-    ViewData["Title"] = "MeuJardim";
+    ViewData["Title"] = "Meu Jardim:";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h1 style="color: green">@ViewData["Title"]</h1>
+<style>
+    .container {
+    position: relative;
+    min-height: 100vh;
+  }
 
-<div>
-    
+  .bottom-button {
+    position: absolute;
+    bottom: 85px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+</style>
+
+<table class="table">
+    <tr>
+        <th>Planta</th>
+        <th>Descrição</th>
+        <th>Dia Plantado</th>
+    </tr>
+</table> 
+
+<div class="">
+    <a class="w-50 btn btn-lg btn-success bottom-button" asp-page="/Jardim/AdicionarPlanta">Adicionar Planta ao Jardim</a>
 </div>

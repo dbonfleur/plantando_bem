@@ -1,0 +1,37 @@
+.material-icons-round.md-36 { font-size: 36px; }
+.material-icons-round.md-28 { font-size: 28px; }
+.material-icons-round.verde { color: #009900; }
+.material-icons-round.branco { color: #FFFFFF; }
+.material-icons-round.vermelho { color: #8e0a0a; }
+.col-md-2 {
+    border-right: 1px ridge #009900;
+}
+.borda-verde {
+    line-height: 15px; /* Reduz o espaçamento interno */
+    height: 20%;
+    border: 2px dashed #009900; /* Define a borda pontilhada */
+}
+.borda-verm {
+    line-height: 15px; /* Reduz o espaçamento interno */
+    height: 20%;
+    border: 2px dashed #990000; /* Define a borda pontilhada */
+}
+.fnd-verm-claro {
+    background-color: rgba(219, 22, 22, 0.141);
+}
+.fnd-verd-claro {
+    background-color: rgba(0, 153, 0, 0.21);
+}
+.fnd-verd-claro-2 {
+    background-color: rgba(0, 255, 0, 0.28);
+}
+.fnd-selecionado {
+    background-color: rgba(0, 153, 0, 0.72);
+}
+.texto-branco {
+    color: #FFFFFF;
+}
+.div-menu {
+    padding-left: 0px;
+    padding-right: 0px;
+}

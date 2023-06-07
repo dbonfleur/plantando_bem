@@ -1,11 +1,31 @@
 @page
 @model plantando_bem.RazorPages.Pages.Calendario.CalendarioPrincipal
+
 @{
     ViewData["Title"] = "Calendario Principal";
 }
-
 <h1>@ViewData["Title"]</h1>
 
-<div>
-    
+<link rel="stylesheet" href="~/css/calendar.css" />
+
+<div id="calendar-container">
+    <div id="calendar">
+        <div class="header">
+            <button id="prev-month">&#8249;</button>
+            <h2 id="current-month"></h2>
+            <button id="next-month">&#8250;</button>
+        </div>
+        <div class="days">
+            <div class="day">Dom</div>
+            <div class="day">Seg</div>
+            <div class="day">Ter</div>
+            <div class="day">Qua</div>
+            <div class="day">Qui</div>
+            <div class="day">Sex</div>
+            <div class="day">Sáb</div>
+        </div>
+        <div id="calendar-body"></div>
+    </div>
 </div>
+
+<script src="~/js/calendar.js"></script>

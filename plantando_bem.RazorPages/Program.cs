@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using plantando_bem.RazorPages.Data;
 using plantando_bem.RazorPages.Areas.Identity.Data;
 using plantando_bem.RazorPages.Models.Geocode;
+using plantando_bem.RazorPages.Models.Jardim;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
 builder.Services.AddHttpClient<IGeocodeService, GeocodeService>();
+builder.Services.AddScoped<TrefleApiService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

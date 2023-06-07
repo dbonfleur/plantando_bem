@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Ay6suShpaA9d7zJ5I9jpllcnn83k3HMBtOC/fGmoXbo=",
+  "Hash": "1ZQmJptqpEKxfWzLAwpFUS+TldsSr1BotrQ9U8O7g4w=",
   "Source": "plantando_bem.RazorPages",
   "BasePath": "_content/plantando_bem.RazorPages",
   "Mode": "Default",
@@ -1071,6 +1071,40 @@
       "OriginalItemSpec": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\plantando_bem.RazorPages.bundle.scp.css"
     },
     {
+      "Identity": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\css\\calendar.css",
+      "SourceId": "plantando_bem.RazorPages",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\",
+      "BasePath": "_content/plantando_bem.RazorPages",
+      "RelativePath": "css/calendar.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\calendar.css"
+    },
+    {
+      "Identity": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\css\\menu.css",
+      "SourceId": "plantando_bem.RazorPages",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\",
+      "BasePath": "_content/plantando_bem.RazorPages",
+      "RelativePath": "css/menu.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\menu.css"
+    },
+    {
       "Identity": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\css\\site.css",
       "SourceId": "plantando_bem.RazorPages",
       "SourceType": "Discovered",
@@ -1154,6 +1188,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\logo.jpg"
+    },
+    {
+      "Identity": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\js\\calendar.js",
+      "SourceId": "plantando_bem.RazorPages",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\",
+      "BasePath": "_content/plantando_bem.RazorPages",
+      "RelativePath": "js/calendar.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\calendar.js"
+    },
+    {
+      "Identity": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\js\\menu.js",
+      "SourceId": "plantando_bem.RazorPages",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\",
+      "BasePath": "_content/plantando_bem.RazorPages",
+      "RelativePath": "js/menu.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\menu.js"
     },
     {
       "Identity": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\js\\site.js",
@@ -2140,6 +2208,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Identity": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\pdf\\Catalogo-hortalicas.pdf",
+      "SourceId": "plantando_bem.RazorPages",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\",
+      "BasePath": "_content/plantando_bem.RazorPages",
+      "RelativePath": "pdf/Catalogo-hortalicas.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\pdf\\Catalogo-hortalicas.pdf"
     }
   ]
 }

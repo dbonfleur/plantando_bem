@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets\\plantando_bem.RazorPages.bundle.scp.css"
     },
     {
+      "Id": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\css\\calendar.css",
+      "PackagePath": "staticwebassets\\css\\calendar.css"
+    },
+    {
+      "Id": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\css\\menu.css",
+      "PackagePath": "staticwebassets\\css\\menu.css"
+    },
+    {
       "Id": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
@@ -23,6 +31,14 @@
     {
       "Id": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\img\\logo.jpg",
       "PackagePath": "staticwebassets\\img\\logo.jpg"
+    },
+    {
+      "Id": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\js\\calendar.js",
+      "PackagePath": "staticwebassets\\js\\calendar.js"
+    },
+    {
+      "Id": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\js\\menu.js",
+      "PackagePath": "staticwebassets\\js\\menu.js"
     },
     {
       "Id": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\js\\site.js",
@@ -255,6 +271,10 @@
     {
       "Id": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\pdf\\Catalogo-hortalicas.pdf",
+      "PackagePath": "staticwebassets\\pdf\\Catalogo-hortalicas.pdf"
     },
     {
       "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.plantando_bem.RazorPages.props",

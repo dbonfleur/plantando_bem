@@ -196,6 +196,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSXJyaWdhY2FvXElycmlnYWNvZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/GitHub/plantando_bem/plantando_bem.RazorPages/Pages/Jardim/AdicionarPlanta.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSmFyZGltXEFkaWNpb25hclBsYW50YS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/GitHub/plantando_bem/plantando_bem.RazorPages/Pages/Jardim/MeuJardim.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSmFyZGltXE1ldUphcmRpbS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

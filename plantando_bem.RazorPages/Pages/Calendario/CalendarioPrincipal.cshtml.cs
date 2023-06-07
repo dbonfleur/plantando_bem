@@ -45,9 +45,10 @@ namespace plantando_bem.RazorPages.Pages.Calendario
                 {
                     Console.WriteLine($"Ocorreu um erro ao fazer a requisição: {ex.Message}");
                 }
-                
+
                 return Page(); 
             }
         }
     }
+
 }
