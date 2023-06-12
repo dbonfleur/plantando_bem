@@ -1,23 +1,36 @@
+
 @page
-@model plantando_bem.RazorPages.Pages.Jardim.AdicionarPlanta
+@model plantando_bem.RazorPages.Pages.Jardim.SelecionaPlanta
 @{
     ViewData["Title"] = "Adicionar Planta no Jardim:";
 }
 
 <h2 style="color: green">@ViewData["Title"]</h2>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="~/css/addPlanta.css">
 
-<div class="container">
-    <select id="plantaSelect">
-        <option value="">Selecione uma planta</option>
-        @foreach (var planta in Model.Plantas)
-        {
-            <option value="@planta.Id">@planta.Nome</option>
-        }
-    </select>
-    <div class="row">
+<div class="container cont">
+    <table>
+        <tr>
+            <th>
+                Catálogo:
+            </th>
+            <th>
+                <select id="plantaSelect" class="form-select slc">
+                    <option value="">Selecione uma planta</option>
+                    @foreach (var planta in Model.Plantas)
+                    {
+                        <option value="@planta.Id">@planta.Nome</option>
+                    }
+                </select>
+            </th>
+            <th>
+                <a id="plantaBtn" class="w-100 btn btn-success bottom-button slc">Adicionar Planta</a>
+            </th>
+        </tr>
+    </table>
+    <div class="row rw">
         <div class="col-md-9">
-            <h4>70% de largura</h4>
             <div id="plantaDetails" style="display: none;">
                 <p><strong>Nome: </strong><span id="nomePlanta"></span></p>
                 <p><strong>Nome Científico: </strong><span id="nomeCientificoPlanta"></span></p>
@@ -26,28 +39,36 @@
                 <p><strong>Recomendação de Aproveitamento: </strong><span id="recomAproveitamentoPlanta"></span></p>
             </div>
         </div>
-        <div class="col-md-3">
-            <h4>30% de largura</h4>
+        <div class="col-md-3 d-flex align-items-center">
+            <div id="plantaImg" style="display: none;">
+                <img id="imagePlanta" alt="planta" style="width: 100%;" />
+            </div>
         </div>
-    </div>
+    </div
 </div>
 
 <script>
     $(document).ready(function () {
         $('#plantaSelect').change(function () {
             var selectedPlantaId = $(this).val();
+            $('#plantaId').val(selectedPlantaId); // Define o valor do campo oculto diretamente como o ID selecionado
             var selectedPlanta = @Html.Raw(Json.Serialize(Model.Plantas));
             var planta = selectedPlanta.find(p => p.id === parseInt(selectedPlantaId));
-
             if (planta) {
                 $('#nomePlanta').text(planta.nome);
                 $('#nomeCientificoPlanta').text(planta.nomeCientifico);
                 $('#descricaoPlanta').text(planta.descricao);
                 $('#regiaoPlantioPlanta').text(planta.regiaoPlantio);
                 $('#recomAproveitamentoPlanta').text(planta.recomAprov);
+                var imgSrc = "/img/plantas/" + planta.id + ".png";
+                $('#imagePlanta').attr('src', imgSrc);
+                var btnHref = "/Jardim/AdicionaPlanta/" + planta.id;
+                $('#plantaBtn').attr('href', btnHref);
                 $('#plantaDetails').show();
+                $('#plantaImg').show();
             } else {
                 $('#plantaDetails').hide();
+                $('#plantaImg').hide();
             }
         });
     });

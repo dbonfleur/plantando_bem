@@ -1,31 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\plantando_bem.RazorPages.csproj": {}
+    "c:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\plantando_bem.RazorPages.csproj": {}
   },
   "projects": {
-    "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\plantando_bem.RazorPages.csproj": {
+    "c:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\plantando_bem.RazorPages.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\plantando_bem.RazorPages.csproj",
+        "projectUniqueName": "c:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\plantando_bem.RazorPages.csproj",
         "projectName": "plantando_bem.RazorPages",
-        "projectPath": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\plantando_bem.RazorPages.csproj",
-        "packagesPath": "C:\\Users\\danib\\.nuget\\packages\\",
-        "outputPath": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\obj\\",
+        "projectPath": "c:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\plantando_bem.RazorPages.csproj",
+        "packagesPath": "C:\\Users\\Daniel\\.nuget\\packages\\",
+        "outputPath": "c:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\danib\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Daniel\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

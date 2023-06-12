@@ -1,3 +1,4 @@
+using plantando_bem.RazorPages.Models.Jardim;
 using plantando_bem.RazorPages.Models.Localidades;
 
 namespace plantando_bem.RazorPages.Models
@@ -11,5 +12,6 @@ namespace plantando_bem.RazorPages.Models
         public int? IdNetUser { get; set; }
         public EstadoModel? Estado { get; set; }
         public CidadeModel? Cidade { get; set; }
+        public List<Planta>? Plantas { get; set; }
     }
 }

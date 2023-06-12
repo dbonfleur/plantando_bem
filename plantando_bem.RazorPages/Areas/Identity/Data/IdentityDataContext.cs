@@ -79,5 +79,21 @@ public class IdentityDataContext : IdentityDbContext<IdentityUser>
                     jK.ToTable("EpocaRegiaoPlanta");
                 }
             );
+        builder.Entity<UserModel>()
+            .HasMany(user => user.Plantas)
+            .WithMany()
+            .UsingEntity<Dictionary<string, object>>(
+                "UserPlantas",
+                j => j.HasOne<Planta>().WithMany().HasForeignKey("IdPlanta"),
+                j => j.HasOne<UserModel>().WithMany().HasForeignKey("IdUser"),
+                j =>
+                {
+                    j.HasKey("IdUser", "IdPlanta");
+                    j.Property("DataInicio").HasColumnType("datetime");
+                    j.Property("DataMinFinal").HasColumnType("datetime");
+                    j.Property("DataMaxFinal").HasColumnType("datetime");
+                    j.ToTable("UserPlantas");
+                }
+            );
     }
 }

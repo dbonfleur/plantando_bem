@@ -9,14 +9,14 @@ namespace plantando_bem.RazorPages.Pages.Jardim
 {
 
     [Authorize]
-    public class AdicionarPlanta : PageModel
+    public class SelecionaPlanta : PageModel
     {
-        private readonly ILogger<AdicionarPlanta> _logger;
+        private readonly ILogger<SelecionaPlanta> _logger;
         private readonly IdentityDataContext _context;
         [BindProperty]
         public List<Planta> Plantas { get; set; } = new();
 
-        public AdicionarPlanta(ILogger<AdicionarPlanta> logger, IdentityDataContext context)
+        public SelecionaPlanta(ILogger<SelecionaPlanta> logger, IdentityDataContext context)
         {
             _logger = logger;
             _context = context;
