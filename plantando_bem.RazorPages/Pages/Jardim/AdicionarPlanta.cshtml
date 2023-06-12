@@ -1,7 +1,54 @@
 @page
 @model plantando_bem.RazorPages.Pages.Jardim.AdicionarPlanta
 @{
-    ViewData["Title"] = "AdicionarPlanta";
+    ViewData["Title"] = "Adicionar Planta no Jardim:";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h2 style="color: green">@ViewData["Title"]</h2>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<div class="container">
+    <select id="plantaSelect">
+        <option value="">Selecione uma planta</option>
+        @foreach (var planta in Model.Plantas)
+        {
+            <option value="@planta.Id">@planta.Nome</option>
+        }
+    </select>
+    <div class="row">
+        <div class="col-md-9">
+            <h4>70% de largura</h4>
+            <div id="plantaDetails" style="display: none;">
+                <p><strong>Nome: </strong><span id="nomePlanta"></span></p>
+                <p><strong>Nome Científico: </strong><span id="nomeCientificoPlanta"></span></p>
+                <p><strong>Descrição: </strong><span id="descricaoPlanta"></span></p>
+                <p><strong>Região para Plantio: </strong><span id="regiaoPlantioPlanta"></span></p>
+                <p><strong>Recomendação de Aproveitamento: </strong><span id="recomAproveitamentoPlanta"></span></p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <h4>30% de largura</h4>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#plantaSelect').change(function () {
+            var selectedPlantaId = $(this).val();
+            var selectedPlanta = @Html.Raw(Json.Serialize(Model.Plantas));
+            var planta = selectedPlanta.find(p => p.id === parseInt(selectedPlantaId));
+
+            if (planta) {
+                $('#nomePlanta').text(planta.nome);
+                $('#nomeCientificoPlanta').text(planta.nomeCientifico);
+                $('#descricaoPlanta').text(planta.descricao);
+                $('#regiaoPlantioPlanta').text(planta.regiaoPlantio);
+                $('#recomAproveitamentoPlanta').text(planta.recomAprov);
+                $('#plantaDetails').show();
+            } else {
+                $('#plantaDetails').hide();
+            }
+        });
+    });
+</script>

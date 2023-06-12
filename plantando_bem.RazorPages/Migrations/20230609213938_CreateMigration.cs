@@ -51,6 +51,34 @@ namespace plantando_bem.RazorPages.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DiasPlanta",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    DiaMin = table.Column<int>(type: "INTEGER", nullable: true),
+                    DiaMax = table.Column<int>(type: "INTEGER", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DiasPlanta", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EpocaRegiao",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Regiao = table.Column<string>(type: "TEXT", nullable: true),
+                    Meses = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EpocaRegiao", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Regiao",
                 columns: table => new
                 {
@@ -171,6 +199,29 @@ namespace plantando_bem.RazorPages.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Planta",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    IdDias = table.Column<int>(type: "INTEGER", nullable: true),
+                    Nome = table.Column<string>(type: "TEXT", nullable: true),
+                    NomeCientifico = table.Column<string>(type: "TEXT", nullable: true),
+                    Descricao = table.Column<string>(type: "TEXT", nullable: true),
+                    RegiaoPlantio = table.Column<string>(type: "TEXT", nullable: true),
+                    RecomAprov = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Planta", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Planta_DiasPlanta_IdDias",
+                        column: x => x.IdDias,
+                        principalTable: "DiasPlanta",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Estado",
                 columns: table => new
                 {
@@ -208,6 +259,30 @@ namespace plantando_bem.RazorPages.Migrations
                         column: x => x.IdRegiao,
                         principalTable: "Regiao",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EpocaRegiaoPlanta",
+                columns: table => new
+                {
+                    IdEpocaRegiao = table.Column<int>(type: "INTEGER", nullable: false),
+                    IdPlanta = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EpocaRegiaoPlanta", x => new { x.IdEpocaRegiao, x.IdPlanta });
+                    table.ForeignKey(
+                        name: "FK_EpocaRegiaoPlanta_EpocaRegiao_IdEpocaRegiao",
+                        column: x => x.IdEpocaRegiao,
+                        principalTable: "EpocaRegiao",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EpocaRegiaoPlanta_Planta_IdPlanta",
+                        column: x => x.IdPlanta,
+                        principalTable: "Planta",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -319,7 +394,8 @@ namespace plantando_bem.RazorPages.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Nome = table.Column<string>(type: "TEXT", nullable: true),
                     IdEstado = table.Column<int>(type: "INTEGER", nullable: true),
-                    IdCidade = table.Column<int>(type: "INTEGER", nullable: true)
+                    IdCidade = table.Column<int>(type: "INTEGER", nullable: true),
+                    IdNetUser = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -384,6 +460,11 @@ namespace plantando_bem.RazorPages.Migrations
                 column: "IdRegiaoImediata");
 
             migrationBuilder.CreateIndex(
+                name: "IX_EpocaRegiaoPlanta_IdPlanta",
+                table: "EpocaRegiaoPlanta",
+                column: "IdPlanta");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Estado_IdRegiao",
                 table: "Estado",
                 column: "IdRegiao");
@@ -397,6 +478,11 @@ namespace plantando_bem.RazorPages.Migrations
                 name: "IX_Microrregiao_IdMessorregiao",
                 table: "Microrregiao",
                 column: "IdMessorregiao");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Planta_IdDias",
+                table: "Planta",
+                column: "IdDias");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RegiaoImediata_IdRegiaoInt",
@@ -443,6 +529,9 @@ namespace plantando_bem.RazorPages.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "EpocaRegiaoPlanta");
+
+            migrationBuilder.DropTable(
                 name: "User");
 
             migrationBuilder.DropTable(
@@ -452,10 +541,19 @@ namespace plantando_bem.RazorPages.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
+                name: "EpocaRegiao");
+
+            migrationBuilder.DropTable(
+                name: "Planta");
+
+            migrationBuilder.DropTable(
                 name: "Cidade");
 
             migrationBuilder.DropTable(
                 name: "Estado");
+
+            migrationBuilder.DropTable(
+                name: "DiasPlanta");
 
             migrationBuilder.DropTable(
                 name: "Microrregiao");

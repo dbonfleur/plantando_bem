@@ -11,7 +11,7 @@ using plantando_bem.RazorPages.Areas.Identity.Data;
 namespace plantando_bem.RazorPages.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-    [Migration("20230604143150_CreateMigration")]
+    [Migration("20230609213938_CreateMigration")]
     partial class CreateMigration
     {
         /// <inheritdoc />
@@ -19,6 +19,21 @@ namespace plantando_bem.RazorPages.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
+
+            modelBuilder.Entity("EpocaRegiaoPlanta", b =>
+                {
+                    b.Property<int>("IdEpocaRegiao")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("IdPlanta")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("IdEpocaRegiao", "IdPlanta");
+
+                    b.HasIndex("IdPlanta");
+
+                    b.ToTable("EpocaRegiaoPlanta", (string)null);
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -216,6 +231,71 @@ namespace plantando_bem.RazorPages.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("plantando_bem.RazorPages.Models.Jardim.DiasPlanta", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("DiaMax")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("DiaMin")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DiasPlanta", (string)null);
+                });
+
+            modelBuilder.Entity("plantando_bem.RazorPages.Models.Jardim.EpocaRegiao", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Meses")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Regiao")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EpocaRegiao", (string)null);
+                });
+
+            modelBuilder.Entity("plantando_bem.RazorPages.Models.Jardim.Planta", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Descricao")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("IdDias")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NomeCientifico")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RecomAprov")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RegiaoPlantio")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdDias");
+
+                    b.ToTable("Planta", (string)null);
+                });
+
             modelBuilder.Entity("plantando_bem.RazorPages.Models.Localidades.CidadeModel", b =>
                 {
                     b.Property<int>("Id")
@@ -389,6 +469,9 @@ namespace plantando_bem.RazorPages.Migrations
                     b.Property<int?>("IdEstado")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("IdNetUser")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Nome")
                         .HasColumnType("TEXT");
 
@@ -399,6 +482,21 @@ namespace plantando_bem.RazorPages.Migrations
                     b.HasIndex("IdEstado");
 
                     b.ToTable("User", (string)null);
+                });
+
+            modelBuilder.Entity("EpocaRegiaoPlanta", b =>
+                {
+                    b.HasOne("plantando_bem.RazorPages.Models.Jardim.EpocaRegiao", null)
+                        .WithMany()
+                        .HasForeignKey("IdEpocaRegiao")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("plantando_bem.RazorPages.Models.Jardim.Planta", null)
+                        .WithMany()
+                        .HasForeignKey("IdPlanta")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -450,6 +548,15 @@ namespace plantando_bem.RazorPages.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("plantando_bem.RazorPages.Models.Jardim.Planta", b =>
+                {
+                    b.HasOne("plantando_bem.RazorPages.Models.Jardim.DiasPlanta", "Dias")
+                        .WithMany()
+                        .HasForeignKey("IdDias");
+
+                    b.Navigation("Dias");
                 });
 
             modelBuilder.Entity("plantando_bem.RazorPages.Models.Localidades.CidadeModel", b =>

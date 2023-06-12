@@ -33,6 +33,34 @@
       "PackagePath": "staticwebassets\\img\\logo.jpg"
     },
     {
+      "Id": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\img\\plantas\\1.png",
+      "PackagePath": "staticwebassets\\img\\plantas\\1.png"
+    },
+    {
+      "Id": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\img\\plantas\\2.png",
+      "PackagePath": "staticwebassets\\img\\plantas\\2.png"
+    },
+    {
+      "Id": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\img\\plantas\\3.png",
+      "PackagePath": "staticwebassets\\img\\plantas\\3.png"
+    },
+    {
+      "Id": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\img\\plantas\\4.png",
+      "PackagePath": "staticwebassets\\img\\plantas\\4.png"
+    },
+    {
+      "Id": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\img\\plantas\\5.png",
+      "PackagePath": "staticwebassets\\img\\plantas\\5.png"
+    },
+    {
+      "Id": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\img\\plantas\\6.png",
+      "PackagePath": "staticwebassets\\img\\plantas\\6.png"
+    },
+    {
+      "Id": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\img\\plantas\\7.png",
+      "PackagePath": "staticwebassets\\img\\plantas\\7.png"
+    },
+    {
       "Id": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\js\\calendar.js",
       "PackagePath": "staticwebassets\\js\\calendar.js"
     },
