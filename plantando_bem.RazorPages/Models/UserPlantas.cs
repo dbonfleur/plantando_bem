@@ -11,5 +11,8 @@ namespace plantando_bem.RazorPages.Models
         public string? DataInicio { get; set; }
         public string? DataFinalMin { get; set; }
         public string? DataFinalMax { get; set; }
+        public string RetornaIdPng() {
+            return PlantaId + ".png";
+        }
     }
 }

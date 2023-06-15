@@ -7,26 +7,31 @@
 <h2 style="color: green">@ViewData["Title"]</h2>
 
 <style>
-    .container {
-    position: relative;
-    min-height: 100vh;
-  }
-
-  .bottom-button {
-    position: absolute;
-    bottom: 85px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
+    .bottom-button {
+        position: absolute;
+        bottom: 85px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
 </style>
 
-<table class="table">
-    <tr>
-        <th>Planta</th>
-        <th>Descrição</th>
-        <th>Dia Plantado</th>
-    </tr>
-</table> 
+@if(@Model.UserPlantas != null) {
+    <table class="table">
+        <tr>
+            <th>Planta</th>
+            <th>Ilutração</th>
+            <th>Dia Plantado</th>
+        </tr>
+        @foreach (var planta in @Model.UserPlantas)
+        {
+            <tr>
+                <td>@planta.Planta!.Nome</td>
+                <td><img alt="planta" src="/img/plantas/@planta.RetornaIdPng()" style="width: 10%;" /></td>
+                <td>@planta.DataInicio</td>
+            </tr>
+        }
+    </table>       
+} 
 
 <div class="">
     <a class="w-50 btn btn-lg btn-success bottom-button" asp-page="/Jardim/SelecionaPlanta">Adicionar Planta ao Jardim</a>
