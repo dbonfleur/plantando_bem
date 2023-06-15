@@ -36,6 +36,15 @@
                 "${workspaceFolder}/plantando_bem.RazorPages/plantando_bem.RazorPages.csproj"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "dotnet",
+            "task": "build",
+            "problemMatcher": [
+                "$msCompile"
+            ],
+            "group": "build",
+            "label": "dotnet: build"
         }
     ]
 }

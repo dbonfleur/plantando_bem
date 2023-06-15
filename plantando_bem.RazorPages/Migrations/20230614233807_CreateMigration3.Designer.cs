@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using plantando_bem.RazorPages.Areas.Identity.Data;
 
@@ -10,9 +11,11 @@ using plantando_bem.RazorPages.Areas.Identity.Data;
 namespace plantando_bem.RazorPages.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-    partial class IdentityDataContextModelSnapshot : ModelSnapshot
+    [Migration("20230614233807_CreateMigration3")]
+    partial class CreateMigration3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
@@ -286,9 +289,14 @@ namespace plantando_bem.RazorPages.Migrations
                     b.Property<string>("RegiaoPlantio")
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("UserModelId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.HasIndex("IdDias");
+
+                    b.HasIndex("UserModelId");
 
                     b.ToTable("Planta", (string)null);
                 });
@@ -483,10 +491,7 @@ namespace plantando_bem.RazorPages.Migrations
 
             modelBuilder.Entity("plantando_bem.RazorPages.Models.UserPlantas", b =>
                 {
-                    b.Property<int?>("UserId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("PlantaId")
+                    b.Property<int?>("IdPlanta")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("DataFinalMax")
@@ -498,9 +503,12 @@ namespace plantando_bem.RazorPages.Migrations
                     b.Property<DateTime?>("DataInicio")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("UserId", "PlantaId");
+                    b.Property<int?>("IdUser")
+                        .HasColumnType("INTEGER");
 
-                    b.HasIndex("PlantaId");
+                    b.HasKey("IdPlanta");
+
+                    b.HasIndex("IdUser");
 
                     b.ToTable("UserPlantas", (string)null);
                 });
@@ -576,6 +584,10 @@ namespace plantando_bem.RazorPages.Migrations
                     b.HasOne("plantando_bem.RazorPages.Models.Jardim.DiasPlanta", "Dias")
                         .WithMany()
                         .HasForeignKey("IdDias");
+
+                    b.HasOne("plantando_bem.RazorPages.Models.UserModel", null)
+                        .WithMany("Plantas")
+                        .HasForeignKey("UserModelId");
 
                     b.Navigation("Dias");
                 });
@@ -667,25 +679,18 @@ namespace plantando_bem.RazorPages.Migrations
             modelBuilder.Entity("plantando_bem.RazorPages.Models.UserPlantas", b =>
                 {
                     b.HasOne("plantando_bem.RazorPages.Models.Jardim.Planta", "Planta")
-                        .WithMany("UsuariosPlantas")
-                        .HasForeignKey("PlantaId")
+                        .WithMany()
+                        .HasForeignKey("IdPlanta")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("plantando_bem.RazorPages.Models.UserModel", "User")
-                        .WithMany("Plantas")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("IdUser");
 
                     b.Navigation("Planta");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("plantando_bem.RazorPages.Models.Jardim.Planta", b =>
-                {
-                    b.Navigation("UsuariosPlantas");
                 });
 
             modelBuilder.Entity("plantando_bem.RazorPages.Models.UserModel", b =>

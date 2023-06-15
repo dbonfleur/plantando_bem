@@ -21,6 +21,7 @@ public class IdentityDataContext : IdentityDbContext<IdentityUser>
     public DbSet<DiasPlanta>? DiasPlanta { get; set; }
     public DbSet<EpocaRegiao>? EpocaRegiao { get; set; }
     public DbSet<Planta>? Planta { get; set; }
+    public DbSet<UserPlantas>? UserPlantas { get; set; }
     private readonly IConfiguration _configuration;
     public IdentityDataContext(DbContextOptions<IdentityDataContext> options, IConfiguration configuration)
         : base(options)
@@ -79,21 +80,20 @@ public class IdentityDataContext : IdentityDbContext<IdentityUser>
                     jK.ToTable("EpocaRegiaoPlanta");
                 }
             );
-        builder.Entity<UserModel>()
-            .HasMany(user => user.Plantas)
-            .WithMany()
-            .UsingEntity<Dictionary<string, object>>(
-                "UserPlantas",
-                j => j.HasOne<Planta>().WithMany().HasForeignKey("IdPlanta"),
-                j => j.HasOne<UserModel>().WithMany().HasForeignKey("IdUser"),
-                j =>
-                {
-                    j.HasKey("IdUser", "IdPlanta");
-                    j.Property("DataInicio").HasColumnType("datetime");
-                    j.Property("DataMinFinal").HasColumnType("datetime");
-                    j.Property("DataMaxFinal").HasColumnType("datetime");
-                    j.ToTable("UserPlantas");
-                }
-            );
-    }
+        
+        
+        builder.Entity<UserPlantas>()
+                .ToTable("UserPlantas")
+                .HasKey(up => new { up.UserId, up.PlantaId });
+                
+        builder.Entity<UserPlantas>()
+                .HasOne(up => up.User)
+                .WithMany(u => u.Plantas)
+                .HasForeignKey(up => up.UserId);
+
+        builder.Entity<UserPlantas>()
+                .HasOne(up => up.Planta)
+                .WithMany(u => u.UsuariosPlantas)
+                .HasForeignKey(up => up.PlantaId);
+    }   
 }

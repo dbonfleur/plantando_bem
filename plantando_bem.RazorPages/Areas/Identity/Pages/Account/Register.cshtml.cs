@@ -224,16 +224,6 @@ namespace plantando_bem.RazorPages.Areas.Identity.Pages.Account
                     _context.Entry(existCidade).State = EntityState.Detached;
                 }
 
-                try {
-                    Usuario.IdCidade = Cidade.Id;
-                    Usuario.IdEstado = Estado.Id;
-
-                    await _context.AddAsync(Usuario);
-                    await _context.SaveChangesAsync();
-                } catch(DbUpdateException) {
-                    return Page();
-                }
-
                 var user = CreateUser();
 
                 await _userStore.SetUserNameAsync(user, Usuario.Nome, CancellationToken.None);
@@ -242,7 +232,6 @@ namespace plantando_bem.RazorPages.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
-
                     
                     _logger.LogInformation("User created a new account with password.");
 
@@ -250,7 +239,15 @@ namespace plantando_bem.RazorPages.Areas.Identity.Pages.Account
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
 
-                    
+                    try {
+                        Usuario.IdCidade = Cidade.Id;
+                        Usuario.IdEstado = Estado.Id;
+                        Usuario.IdNetUser = userId;
+                        await _context.AddAsync(Usuario);
+                        await _context.SaveChangesAsync();
+                    } catch(DbUpdateException) {
+                        return Page();
+                    }
 
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",

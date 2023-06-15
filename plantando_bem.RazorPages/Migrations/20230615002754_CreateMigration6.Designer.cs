@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using plantando_bem.RazorPages.Areas.Identity.Data;
 
@@ -10,9 +11,11 @@ using plantando_bem.RazorPages.Areas.Identity.Data;
 namespace plantando_bem.RazorPages.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-    partial class IdentityDataContextModelSnapshot : ModelSnapshot
+    [Migration("20230615002754_CreateMigration6")]
+    partial class CreateMigration6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
@@ -226,6 +229,40 @@ namespace plantando_bem.RazorPages.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("UserPlantas", b =>
+                {
+                    b.Property<int?>("PlantaId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("DataFinalMax")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("DataFinalMin")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("DataInicio")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("PlantaId1")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("PlantaId", "UserId");
+
+                    b.HasIndex("PlantaId1");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("UserPlantas", (string)null);
                 });
 
             modelBuilder.Entity("plantando_bem.RazorPages.Models.Jardim.DiasPlanta", b =>
@@ -481,30 +518,6 @@ namespace plantando_bem.RazorPages.Migrations
                     b.ToTable("User", (string)null);
                 });
 
-            modelBuilder.Entity("plantando_bem.RazorPages.Models.UserPlantas", b =>
-                {
-                    b.Property<int?>("UserId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("PlantaId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime?>("DataFinalMax")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("DataFinalMin")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("DataInicio")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("UserId", "PlantaId");
-
-                    b.HasIndex("PlantaId");
-
-                    b.ToTable("UserPlantas", (string)null);
-                });
-
             modelBuilder.Entity("EpocaRegiaoPlanta", b =>
                 {
                     b.HasOne("plantando_bem.RazorPages.Models.Jardim.EpocaRegiao", null)
@@ -569,6 +582,33 @@ namespace plantando_bem.RazorPages.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("UserPlantas", b =>
+                {
+                    b.HasOne("plantando_bem.RazorPages.Models.Jardim.Planta", null)
+                        .WithMany()
+                        .HasForeignKey("PlantaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("plantando_bem.RazorPages.Models.Jardim.Planta", "Planta")
+                        .WithMany()
+                        .HasForeignKey("PlantaId1");
+
+                    b.HasOne("plantando_bem.RazorPages.Models.UserModel", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("plantando_bem.RazorPages.Models.UserModel", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId1");
+
+                    b.Navigation("Planta");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("plantando_bem.RazorPages.Models.Jardim.Planta", b =>
@@ -662,35 +702,6 @@ namespace plantando_bem.RazorPages.Migrations
                     b.Navigation("Cidade");
 
                     b.Navigation("Estado");
-                });
-
-            modelBuilder.Entity("plantando_bem.RazorPages.Models.UserPlantas", b =>
-                {
-                    b.HasOne("plantando_bem.RazorPages.Models.Jardim.Planta", "Planta")
-                        .WithMany("UsuariosPlantas")
-                        .HasForeignKey("PlantaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("plantando_bem.RazorPages.Models.UserModel", "User")
-                        .WithMany("Plantas")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Planta");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("plantando_bem.RazorPages.Models.Jardim.Planta", b =>
-                {
-                    b.Navigation("UsuariosPlantas");
-                });
-
-            modelBuilder.Entity("plantando_bem.RazorPages.Models.UserModel", b =>
-                {
-                    b.Navigation("Plantas");
                 });
 #pragma warning restore 612, 618
         }
