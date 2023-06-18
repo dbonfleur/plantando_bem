@@ -262,6 +262,43 @@ namespace plantando_bem.RazorPages.Migrations
                     b.ToTable("EpocaRegiao", (string)null);
                 });
 
+            modelBuilder.Entity("plantando_bem.RazorPages.Models.Jardim.Irrigacao", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("Irrigado")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Irrigacao", (string)null);
+                });
+
+            modelBuilder.Entity("plantando_bem.RazorPages.Models.Jardim.IrrigacaoPlanta", b =>
+                {
+                    b.Property<int>("IrrigacaoId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PlantaId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("IrrigacaoId", "PlantaId");
+
+                    b.HasIndex("PlantaId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("IrrigacaoPlanta", (string)null);
+                });
+
             modelBuilder.Entity("plantando_bem.RazorPages.Models.Jardim.Planta", b =>
                 {
                     b.Property<int?>("Id")
@@ -489,13 +526,13 @@ namespace plantando_bem.RazorPages.Migrations
                     b.Property<int?>("PlantaId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime?>("DataFinalMax")
+                    b.Property<string>("DataFinalMax")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("DataFinalMin")
+                    b.Property<string>("DataFinalMin")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("DataInicio")
+                    b.Property<string>("DataInicio")
                         .HasColumnType("TEXT");
 
                     b.HasKey("UserId", "PlantaId");
@@ -569,6 +606,33 @@ namespace plantando_bem.RazorPages.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("plantando_bem.RazorPages.Models.Jardim.IrrigacaoPlanta", b =>
+                {
+                    b.HasOne("plantando_bem.RazorPages.Models.Jardim.Irrigacao", "Irrigacao")
+                        .WithMany("IrrigacaoPlantas")
+                        .HasForeignKey("IrrigacaoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("plantando_bem.RazorPages.Models.Jardim.Planta", "Planta")
+                        .WithMany("IrrigacaoPlanta")
+                        .HasForeignKey("PlantaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("plantando_bem.RazorPages.Models.UserModel", "Usuario")
+                        .WithMany("IrrigacaoPlantas")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Irrigacao");
+
+                    b.Navigation("Planta");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("plantando_bem.RazorPages.Models.Jardim.Planta", b =>
@@ -673,7 +737,7 @@ namespace plantando_bem.RazorPages.Migrations
                         .IsRequired();
 
                     b.HasOne("plantando_bem.RazorPages.Models.UserModel", "User")
-                        .WithMany("Plantas")
+                        .WithMany("UsuarioPlantas")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -683,14 +747,23 @@ namespace plantando_bem.RazorPages.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("plantando_bem.RazorPages.Models.Jardim.Irrigacao", b =>
+                {
+                    b.Navigation("IrrigacaoPlantas");
+                });
+
             modelBuilder.Entity("plantando_bem.RazorPages.Models.Jardim.Planta", b =>
                 {
+                    b.Navigation("IrrigacaoPlanta");
+
                     b.Navigation("UsuariosPlantas");
                 });
 
             modelBuilder.Entity("plantando_bem.RazorPages.Models.UserModel", b =>
                 {
-                    b.Navigation("Plantas");
+                    b.Navigation("IrrigacaoPlantas");
+
+                    b.Navigation("UsuarioPlantas");
                 });
 #pragma warning restore 612, 618
         }

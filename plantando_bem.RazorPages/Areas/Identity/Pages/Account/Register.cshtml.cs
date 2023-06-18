@@ -107,7 +107,7 @@ namespace plantando_bem.RazorPages.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             using (var httpCliente = new HttpClient())
             {
-                string url = $"https://servicodados.ibge.gov.br/api/v1/localidades/estados";
+                string url = "https://servicodados.ibge.gov.br/api/v1/localidades/estados";
                 var response = await httpCliente.GetAsync(url);
                 
                 var content = await response.Content.ReadAsStringAsync();

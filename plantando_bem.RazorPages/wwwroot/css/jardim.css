@@ -1,0 +1,20 @@
+.bottom-button {
+    position: absolute;
+    bottom: 85px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.tdEpoc {
+    width: 90px;
+    text-align: center;
+}
+
+.my-custom-scrollbar {
+    position: relative;
+    height: 540px;
+    overflow: auto;
+}
+.table-wrapper-scroll-y {
+    display: block;
+}

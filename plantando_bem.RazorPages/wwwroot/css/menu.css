@@ -3,7 +3,7 @@
 .material-icons-round.verde { color: #009900; }
 .material-icons-round.branco { color: #FFFFFF; }
 .material-icons-round.vermelho { color: #8e0a0a; }
-.col-md-2 {
+.colVerde {
     border-right: 1px ridge #009900;
 }
 .borda-verde {

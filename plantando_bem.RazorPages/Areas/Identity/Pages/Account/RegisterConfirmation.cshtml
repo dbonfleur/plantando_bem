@@ -1,8 +1,5 @@
 ﻿@page
 @model RegisterConfirmationModel
-@{
-    ViewData["Title"] = "Register confirmation";
-}
 
 <script>
     window.onload = function() {
@@ -10,7 +7,6 @@
     };
 </script>
 
-<h1>@ViewData["Title"]</h1>
 @{
     if (@Model.DisplayConfirmAccountLink)
     {

@@ -17,6 +17,8 @@ namespace plantando_bem.RazorPages.Pages.Jardim
         private readonly IHttpContextAccessor _httpContextAccessor;
         [BindProperty]
         public List<UserPlantas>? UserPlantas { get; set; } = new();
+        [BindProperty]
+        public UserModel? Usuario { get; set; } = new();
 
         public MeuJardim(IHttpContextAccessor httpContextAccessor, ILogger<MeuJardim> logger, IdentityDataContext context, UserManager<IdentityUser> userManager)
         {
@@ -31,11 +33,15 @@ namespace plantando_bem.RazorPages.Pages.Jardim
             HttpContext httpCont = _httpContextAccessor.HttpContext!;
 
             var userNet = await _userManager.GetUserAsync(httpCont.User);
-            var user = await _context.User!.FirstAsync(t => t.IdNetUser == userNet!.Id);
+            Usuario = await _context.User!.Include(t => t.Estado).Include(m => m.Estado!.Regiao).FirstAsync(t => t.IdNetUser == userNet!.Id);
+
             UserPlantas = await _context.UserPlantas!
-                                            .Include(u => u.Planta)
-                                            .Where(u => u.UserId == user.Id)
+                                            .Where(u => u.UserId == Usuario.Id)
                                             .ToListAsync();
+
+            for(int i=0; i<UserPlantas.Count; i++) {
+                UserPlantas[i].Planta = await _context.Planta!.Include(r => r.Dias).Include(l => l.EpocasRegiao).FirstAsync(p => p.Id == UserPlantas[i].PlantaId);
+            }
 
             return Page();
         }

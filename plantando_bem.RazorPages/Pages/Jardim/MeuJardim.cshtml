@@ -1,38 +1,37 @@
-@page
+@page 
 @model plantando_bem.RazorPages.Pages.Jardim.MeuJardim
 @{
     ViewData["Title"] = "Meu Jardim:";
 }
 
 <h2 style="color: green">@ViewData["Title"]</h2>
+<link rel="stylesheet" href="~/css/jardim.css" />
 
-<style>
-    .bottom-button {
-        position: absolute;
-        bottom: 85px;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-</style>
-
-@if(@Model.UserPlantas != null) {
-    <table class="table">
-        <tr>
-            <th>Planta</th>
-            <th>Ilutração</th>
-            <th>Dia Plantado</th>
-        </tr>
-        @foreach (var planta in @Model.UserPlantas)
-        {
+<div class="table-wrapper-scroll-y my-custom-scrollbar">
+    @if(@Model.UserPlantas != null) {
+        <table class="table">
             <tr>
-                <td>@planta.Planta!.Nome</td>
-                <td><img alt="planta" src="/img/plantas/@planta.RetornaIdPng()" style="width: 10%;" /></td>
-                <td>@planta.DataInicio</td>
+                <th>Planta</th>
+                <th>Ilustração</th>
+                <th>Epoca Plantio @Model.Usuario!.Estado!.Regiao!.Nome</th>
+                <th>Dia Plantado</th>
+                <th>Expectativa colheita</th>
             </tr>
-        }
-    </table>       
-} 
-
-<div class="">
-    <a class="w-50 btn btn-lg btn-success bottom-button" asp-page="/Jardim/SelecionaPlanta">Adicionar Planta ao Jardim</a>
+            @foreach (var planta in @Model.UserPlantas)
+            {
+                <tr>
+                    <td style="vertical-align: middle;">@planta.Planta!.Nome</td>
+                    <td><img alt="planta" src="/img/plantas/@planta.RetornaIdPng()" style="width: 70px;" /></td>
+                    <td style="vertical-align: middle;">@planta.Planta!.EpocasRegiao!.Find(k => k.Regiao == @Model.Usuario!.Estado!.Regiao!.Nome)!.Meses</td>
+                    <td style="vertical-align: middle;">@planta.DataInicio</td>
+                    <td style="vertical-align: middle;">@planta.DataFinalMin ~ @planta.DataFinalMax</td>
+                    <td style="vertical-align: middle;"><a class="btn btn-danger" asp-page="/Jardim/DeletarPlanta" asp-route-id="@planta.PlantaId">Remover</a></td>
+                </tr>
+            }
+        </table>
+    }
 </div>
+<a class="w-50 btn btn-lg btn-success bottom-button" asp-page="/Jardim/SelecionaPlanta" style="margin-left: 60px;">Adicionar Planta ao Jardim</a>
+
+    
+  

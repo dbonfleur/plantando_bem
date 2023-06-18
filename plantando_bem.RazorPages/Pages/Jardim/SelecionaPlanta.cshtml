@@ -37,14 +37,38 @@
                 <p><strong>Descrição: </strong><span id="descricaoPlanta"></span></p>
                 <p><strong>Região para Plantio: </strong><span id="regiaoPlantioPlanta"></span></p>
                 <p><strong>Recomendação de Aproveitamento: </strong><span id="recomAproveitamentoPlanta"></span></p>
+                <table id="epocasRegiaoTable" class="table table-borderless">
+                    <thead>
+                        <tr>
+                            <th colspan="5" style="text-align: center;">Época mais recomendada para plantio</td>
+                        </tr>
+                        <tr>
+                            <th style="text-align: center;">Sul</th>
+                            <th style="text-align: center;">Sudeste</th>
+                            <th style="text-align: center;">Nordeste</th>
+                            <th style="text-align: center;">Centro-Oeste</th>
+                            <th style="text-align: center;">Norte</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="text-align: center;" id="SulMeses"></td>
+                            <td style="text-align: center;" id="SudesteMeses"></td>
+                            <td style="text-align: center;" id="NordesteMeses"></td>
+                            <td style="text-align: center;" id="Centro-OesteMeses"></td>
+                            <td style="text-align: center;" id="NorteMeses"></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+            <div class="alert alert-warning" role="alert" id="alertEpoca" style="display: none;text-align: center;"></div>
         </div>
         <div class="col-md-3 d-flex align-items-center">
             <div id="plantaImg" style="display: none;">
                 <img id="imagePlanta" alt="planta" style="width: 100%;" />
             </div>
         </div>
-    </div
+    </div>
 </div>
 
 <script>
@@ -55,6 +79,7 @@
             var selectedPlanta = @Html.Raw(Json.Serialize(Model.Plantas));
             var planta = selectedPlanta.find(p => p.id === parseInt(selectedPlantaId));
             if (planta) {
+
                 $('#nomePlanta').text(planta.nome);
                 $('#nomeCientificoPlanta').text(planta.nomeCientifico);
                 $('#descricaoPlanta').text(planta.descricao);
@@ -64,6 +89,49 @@
                 $('#imagePlanta').attr('src', imgSrc);
                 var btnHref = "/Jardim/AdicionaPlanta/" + planta.id;
                 $('#plantaBtn').attr('href', btnHref);
+
+                var epocasRegiao = planta.epocasRegiao;
+                $('#SulMeses').text(epocasRegiao.find(k => k.regiao === "Sul").meses);
+                $('#SudesteMeses').text(epocasRegiao.find(k => k.regiao === "Sudeste").meses);
+                $('#NordesteMeses').text(epocasRegiao.find(k => k.regiao === "Nordeste").meses);
+                $('#Centro-OesteMeses').text(epocasRegiao.find(k => k.regiao === "Centro-Oeste").meses);
+                $('#NorteMeses').text(epocasRegiao.find(k => k.regiao === "Norte").meses);
+                
+                var regiaoUser = @Html.Raw(Json.Serialize(Model.RegiaoUser.Nome));
+                var regiaoMesUser = epocasRegiao.find(k => k.regiao === regiaoUser).meses;
+                
+                if(regiaoMesUser !== '*' && regiaoMesUser !== 'ANO TODO') {
+                    var mesesAtuais = new Date().toLocaleString('pt-BR', { month: 'short' }); // Obtém o mês atual no formato abreviado (ex: "Jan", "Fev", etc.)
+                    var removPontoMes = regiaoMesUser.replace(/\./g, "");
+                
+                    var isMesAtualValido = [removPontoMes].some(function (meses) {
+                        var mesSemPonto = mesesAtuais.replace(/\./g, "");
+                        var mesAtual = obterNumeroMes(mesSemPonto.toUpperCase());
+                        var mes = meses.split('/');
+                        var mesMin = obterNumeroMes(mes[0]);
+                        var mesMax = obterNumeroMes(mes[1]);
+
+                        if(mesAtual >= mesMin && mesAtual <= mesMax) {
+                            return true;
+                        } 
+
+                        return false;
+                    });
+                }
+
+                if (regiaoMesUser === '*') {
+                    $('#alertEpoca').text('Não é recomendado o plantio na sua região!');
+                    $('#alertEpoca').show();
+                } else if (!isMesAtualValido && regiaoMesUser !== 'ANO TODO') {
+                    $('#alertEpoca').text('Fora de época para plantio!');
+                    $('#alertEpoca').show();
+                } else {
+                    $('#alertEpoca').hide();
+                } 
+
+                regiaoUser = '#' + regiaoUser + 'Meses';
+                $(regiaoUser).css('border', '2px solid green');
+
                 $('#plantaDetails').show();
                 $('#plantaImg').show();
             } else {
@@ -72,4 +140,14 @@
             }
         });
     });
+
+    function obterNumeroMes(mesAbreviado) {
+        var listMeses = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ'];
+        for(var i=0; i<12; i++) {
+            if(listMeses[i] === mesAbreviado) {
+                return i + 1;
+            }
+        }
+    }
+
 </script>

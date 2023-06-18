@@ -10,3 +10,18 @@
     width: 550px;
     margin-left: 50px;
 }
+
+.tdEpoc {
+    width: 80px;
+    text-align: center;
+}
+
+.my-custom-scrollbar {
+    position: relative;
+    height: 400px;
+    overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+    display: block;
+}

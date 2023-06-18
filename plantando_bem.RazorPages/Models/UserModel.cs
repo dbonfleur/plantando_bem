@@ -12,6 +12,7 @@ namespace plantando_bem.RazorPages.Models
         public string? IdNetUser { get; set; }
         public EstadoModel? Estado { get; set; }
         public CidadeModel? Cidade { get; set; }
-        public ICollection<UserPlantas>? Plantas { get; set; }
+        public ICollection<UserPlantas>? UsuarioPlantas { get; set; }
+        public ICollection<IrrigacaoPlanta>? IrrigacaoPlantas { get; set; }
     }
 }

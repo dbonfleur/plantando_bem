@@ -81,19 +81,40 @@ public class IdentityDataContext : IdentityDbContext<IdentityUser>
                 }
             );
         
-        
         builder.Entity<UserPlantas>()
                 .ToTable("UserPlantas")
                 .HasKey(up => new { up.UserId, up.PlantaId });
                 
         builder.Entity<UserPlantas>()
                 .HasOne(up => up.User)
-                .WithMany(u => u.Plantas)
+                .WithMany(u => u.UsuarioPlantas)
                 .HasForeignKey(up => up.UserId);
 
         builder.Entity<UserPlantas>()
                 .HasOne(up => up.Planta)
                 .WithMany(u => u.UsuariosPlantas)
                 .HasForeignKey(up => up.PlantaId);
+
+        builder.Entity<Irrigacao>().ToTable("Irrigacao").HasKey(k => k.Id);
+        builder.Entity<Irrigacao>().Property(o => o.Id).ValueGeneratedOnAdd();
+
+        builder.Entity<IrrigacaoPlanta>()
+                .ToTable("IrrigacaoPlanta")
+                .HasKey(up => new { up.IrrigacaoId, up.PlantaId });
+                
+        builder.Entity<IrrigacaoPlanta>()
+                .HasOne(up => up.Planta)
+                .WithMany(u => u.IrrigacaoPlanta)
+                .HasForeignKey(up => up.PlantaId);
+
+        builder.Entity<IrrigacaoPlanta>()
+                .HasOne(up => up.Irrigacao)
+                .WithMany(u => u.IrrigacaoPlantas)
+                .HasForeignKey(up => up.IrrigacaoId);
+        
+        builder.Entity<IrrigacaoPlanta>()
+                .HasOne(up => up.Usuario)
+                .WithMany(u => u.IrrigacaoPlantas)
+                .HasForeignKey(up => up.UserId);
     }   
 }

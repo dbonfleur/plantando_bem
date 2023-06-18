@@ -1,13 +1,63 @@
 @page
 @model plantando_bem.RazorPages.Pages.Calendario.CalendarioPrincipal
+@using Newtonsoft.Json
 
-@{
-    ViewData["Title"] = "Calendario Principal";
-}
-<h1>@ViewData["Title"]</h1>
-
-<link rel="stylesheet" href="~/css/calendar.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="~/css/calendar.css"/>
 <script src="~/js/calendar.js"></script>
+
+<div>
+    <table class="table">
+        <tr>
+            <td class="col-md-1">
+                @switch(@Model.Estacao) {
+                    case "Outono":
+                        <span style="margin-top: 10px;" class="badge badge-pill badge-danger">Outono</span>
+                        break;
+                    case "Inverno":
+                        <span style="margin-top: 10px;" class="badge badge-pri">Inverno</span>
+                        break;
+                    case "Primavera":
+                        <span style="margin-top: 10px;" class="badge badge-success">Primavera</span>
+                        break;
+                    case "Verão":
+                        <span style="margin-top: 10px;" class="badge badge-warning">Verão</span>
+                        break;
+                }
+            </td>
+            <td class="col-md-4">
+                <table id="legendaPlanta" class="table table-borderless" style="display: none;margin-bottom: 0px;">
+                    <tr>
+                        <td class="col-md-1">
+                            <div class="legend calendar-day-start"></div>
+                        </td>
+                        <td class="col-md-4">
+                            Crescimento da Planta.
+                        </td>
+                        <td class="col-md-1">
+                            <div class="legend calendar-day-between"></div>
+                        </td>
+                        <td class="col-md-4">
+                            Época de colheita.
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td class="col-md-1">
+                <select id="plantasUser" class="form-select slcPlanta" aria-label="Plantas do Jardim">
+                    <option id="0" value="" selected>Plantas do Jardim</option>
+                    @foreach(var planta in @Model.UserPlantas!)
+                    {
+                        <option id="planta@planta.PlantaId" value="@planta.PlantaId">@planta.Planta!.Nome</option>
+                    }
+                </select>
+            </td>
+            <td class="col-md-1">
+                <a class="btn btn-primary bottom-button btnPrevisao" asp-page="/Calendario/CalendarioPrevisaoTempo">Previsão do Tempo</a>
+            </td>
+        </tr>
+    </table>
+</div>
 
 <div id="calendar-container">
     <div id="calendar">
@@ -29,4 +79,133 @@
     </div>
 </div>
 
+<script>
+    $(document).ready(function() {
+        var currentDate = new Date();
+        var currentMonth = currentDate.getMonth();
+        var currentYear = currentDate.getFullYear();
+        var prevMonthButton = $("#prev-month");
+        var nextMonthButton = $("#next-month");
+        var currentMonthLabel = $("#current-month");
+        var calendarBody = $("#calendar-body");
+        var plantsUser = $('#plantasUser');
 
+        // Event listeners for navigation buttons
+        prevMonthButton.on("click", showPrevMonth);
+        nextMonthButton.on("click", showNextMonth);
+        plantsUser.on("change", verificaPlantaSelecionada)
+
+        // Display the current calendar
+        showCalendar(currentYear, currentMonth);
+
+        function showCalendar(year, month) {
+            calendarBody.empty();
+            currentMonthLabel.text(getMonthName(month) + " " + year);
+            var firstDay = new Date(year, month, 1);
+            var daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            for (var i = 0; i < firstDay.getDay(); i++) {
+                var dayElement = $("<div></div>").addClass("day");
+                calendarBody.append(dayElement);
+            }
+
+            for (var day = 1; day <= daysInMonth; day++) {
+                var dayElement = $("<div></div>").addClass("day").text(day);
+                
+                dayElement.on("mouseover", function() {
+                    if ($(this).hasClass("calendar-day-start")) {
+                        $(this).removeClass("calendar-day-start");
+                        $(this).addClass("calendar-day-start-dark");
+                    } else if ($(this).hasClass("calendar-day-between")) {
+                        $(this).removeClass("calendar-day-between");
+                        $(this).addClass("calendar-day-between-dark");
+                    } else {
+                        $(this).css("backgroundColor", "#808080");
+                    }
+                });
+                
+                dayElement.on("mouseout", function() {
+                    if ($(this).hasClass("calendar-day-start-dark")) {
+                        $(this).removeClass("calendar-day-start-dark");
+                        $(this).addClass("calendar-day-start");
+                    } else if ($(this).hasClass("calendar-day-between-dark")) {
+                        $(this).removeClass("calendar-day-between-dark");
+                        $(this).addClass("calendar-day-between");
+                    } else {
+                        $(this).removeAttr("style");
+                    }
+                });
+                
+                calendarBody.append(dayElement);
+            }
+        }
+
+        function showPrevMonth() {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentYear--;
+                currentMonth = 11;
+            }
+            showCalendar(currentYear, currentMonth);
+            verificaPlantaSelecionada();
+        }
+
+        function showNextMonth() {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentYear++;
+                currentMonth = 0;
+            }
+            showCalendar(currentYear, currentMonth);
+            verificaPlantaSelecionada();
+        }
+
+        function getMonthName(month) {
+            var monthNames = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+            return monthNames[month];
+        }
+            
+        function verificaPlantaSelecionada() {
+            var selectedPlantId = $('#plantasUser').val();
+
+            var listPlants = @Html.Raw(Json.Serialize(Model.UserPlantasJson));
+            
+            var selectedPlant = listPlants.find(k => k.plantaId === parseInt(selectedPlantId));
+            
+            clearCalendarHighlights();
+            
+            if (selectedPlant) {
+                $('#legendaPlanta').css("display", "block");
+                highlightCalendarDays(selectedPlant.dataInicio, selectedPlant.dataFinalMin, "calendar-day-start", 1);
+                highlightCalendarDays(selectedPlant.dataFinalMin, selectedPlant.dataFinalMax, "calendar-day-between", 0);
+            } else {
+                $('#legendaPlanta').css("display", "none");
+            }
+        }
+
+        function clearCalendarHighlights() {
+            
+            var highlightedDays = calendarBody.find(".calendar-day-start, .calendar-day-between");
+            highlightedDays.removeClass("calendar-day-start calendar-day-between");
+        }
+
+        function highlightCalendarDays(startDate, endDate, cssClass, param) {
+            var dataInicioParts = startDate.split("/");
+            var start = new Date(dataInicioParts[2], dataInicioParts[1] - 1, dataInicioParts[0]);
+
+            var dataFinalMinParts = endDate.split("/");
+            var end = new Date(dataFinalMinParts[2], dataFinalMinParts[1] - 1, dataFinalMinParts[0]);
+
+            var days = calendarBody.find(".day");
+
+            days.each(function() {
+                var day = $(this);
+                var currentDate = new Date(currentYear, currentMonth, parseInt(day.text()));
+
+                if (currentDate >= start && currentDate <= (end - param)) {
+                    day.addClass(cssClass);
+                }
+            });
+        }
+    });
+</script>
