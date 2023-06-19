@@ -7,3 +7,17 @@
 .table-wrapper-scroll-y {
     display: block;
 }
+
+.badge-pri {
+    color: #ffffff;
+    background-color: #007bff;
+    padding-right: 0.6em;
+    padding-left: 0.6em;
+    border-radius: 10rem;
+}
+
+.titleIrrigacao {
+    color: rgb(0, 119, 255);
+    padding-top: 15px;
+    padding-bottom: 40px;
+}

@@ -636,3 +636,7 @@ D:\GitHub\plantando_bem\plantando_bem.RazorPages\bin\Debug\net7.0\selenium-manag
 D:\GitHub\plantando_bem\plantando_bem.RazorPages\bin\Debug\net7.0\selenium-manager\macos\selenium-manager
 D:\GitHub\plantando_bem\plantando_bem.RazorPages\bin\Debug\net7.0\selenium-manager\windows\selenium-manager.exe
 D:\GitHub\plantando_bem\plantando_bem.RazorPages\bin\Debug\net7.0\WebDriver.dll
+C:\GitHub\plantando_bem\plantando_bem.RazorPages\bin\Debug\net7.0\selenium-manager\linux\selenium-manager
+C:\GitHub\plantando_bem\plantando_bem.RazorPages\bin\Debug\net7.0\selenium-manager\macos\selenium-manager
+C:\GitHub\plantando_bem\plantando_bem.RazorPages\bin\Debug\net7.0\selenium-manager\windows\selenium-manager.exe
+C:\GitHub\plantando_bem\plantando_bem.RazorPages\bin\Debug\net7.0\WebDriver.dll

@@ -4,8 +4,66 @@
     ViewData["Title"] = "CalendarioPrevisaoTempo";
 }
 
-<h1>@ViewData["Title"]</h1>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="~/css/previsaoCalendario.css"/>
 
-<div>
-    
+<div id="weather-calendar-container">
+    <div id="weather-calendar">
+        <div class="days">
+            <div class="day" id="0">Hoje - @DateTime.Now.ToString("dd/MM/yyyy")</div>
+            <div class="day" id="1">Dia - @DateTime.Now.AddDays(1).ToString("dd/MM/yyyy")</div>
+            <div class="day" id="2">Dia - @DateTime.Now.AddDays(2).ToString("dd/MM/yyyy")</div>
+        </div>
+    </div>
 </div>
+
+<div id="weather-info-container"></div>
+
+<script>
+    $(document).ready(function() {
+        var weatherInfoContainer = $("#weather-info-container");
+        
+        var days = $(".day");
+
+        days.on("click", function() {
+            var day = $(this);
+            // Limpar seleção anterior
+            days.removeClass("selected");
+            
+            // Adicionar classe 'selected' ao dia clicado
+            day.addClass("selected");
+
+            // Limpar conteúdo anterior
+            weatherInfoContainer.empty();
+
+            // Obter informações da previsão do tempo para o dia selecionado
+            var selectedDay = @(Json.Serialize(Model.PrevisaoTempo.Previsao.PrevisaoDias[0])); // Use o índice correto para obter o dia correto
+            var hours = selectedDay.Horas;
+
+            // Exibir informações do tempo para o dia selecionado
+            var weatherInfo = $("<div></div>").addClass("weather-info");
+            var dayLabel = $("<h3></h3>").text("Dia - " + selectedDay.Data);
+            weatherInfo.append(dayLabel);
+
+            var table = $("<table></table>").addClass("weather-table");
+            var tableHead = $("<thead></thead>").html("<tr><th>Hora</th><th>Temperatura (°C)</th><th>Condição</th></tr>");
+            var tableBody = $("<tbody></tbody>");
+
+            for (var i = 0; i < 24; i++) {
+                var hour = hours[i];
+
+                var row = $("<tr></tr>");
+                var hourCell = $("<td></td>").text(hour.Tempo);
+                var tempCell = $("<td></td>").text(hour.TemperaturaEmC);
+                var conditionCell = $("<td></td>").text(hour.CondicaoTempo);
+
+                row.append(hourCell, tempCell, conditionCell);
+                tableBody.append(row);
+            }
+
+            table.append(tableHead, tableBody);
+            weatherInfo.append(table);
+            weatherInfoContainer.append(weatherInfo);
+        });
+    });
+</script>

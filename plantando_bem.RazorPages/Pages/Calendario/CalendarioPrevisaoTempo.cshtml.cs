@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using plantando_bem.RazorPages.Areas.Identity.Data;
-using plantando_bem.RazorPages.Models.WeatherForecast;
+using plantando_bem.RazorPages.Models.PrevisaoDoTempo;
 
 namespace plantando_bem.RazorPages.Pages.Calendario
 {
@@ -20,7 +20,7 @@ namespace plantando_bem.RazorPages.Pages.Calendario
         private readonly IdentityDataContext _context;
         private readonly IHttpClientFactory _clientFactory;
         [BindProperty]
-        public WeatherData PrevisaoTempo { get; set; } = new();
+        public PrevisaoTempo PrevisaoTempo { get; set; } = new();
 
         public CalendarioPrevisaoTempo(IdentityDataContext context, ILogger<CalendarioPrevisaoTempo> logger, IHttpClientFactory clientFactory)
         {
@@ -34,7 +34,7 @@ namespace plantando_bem.RazorPages.Pages.Calendario
             string apiKey = "29ce5cbd6dd841ae924115448230506";
             var usuario = await _context.User!.Include(p => p.Cidade).Include(p => p.Cidade!.Microrregiao).FirstOrDefaultAsync(k => k.Nome == User.Identity!.Name);
             string location = usuario!.Cidade!.Microrregiao!.Nome!.Replace(" ", "_");
-            int numberOfDays = 5;
+            int numberOfDays = 3;
 
             string url = $"https://api.weatherapi.com/v1/forecast.json?key={apiKey}&q={location}&days={numberOfDays}";
 
@@ -44,7 +44,7 @@ namespace plantando_bem.RazorPages.Pages.Calendario
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();
-                PrevisaoTempo = JsonConvert.DeserializeObject<WeatherData>(json)!;
+                PrevisaoTempo = JsonConvert.DeserializeObject<PrevisaoTempo>(json)!;
                 
                 return Page();
             }

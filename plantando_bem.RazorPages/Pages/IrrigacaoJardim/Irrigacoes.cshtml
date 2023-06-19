@@ -5,7 +5,8 @@
     ViewData["Title"] = "Irrigacões do meu Jardim:";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h2 class="titleIrrigacao">@ViewData["Title"]</h2>
+<link rel="stylesheet" href="~/css/irrigacao.css"/>
 
 <div class="table-wrapper-scroll-y my-custom-scrollbar">
     @if(@Model.IrrigacaoPlantas != null) {
@@ -13,13 +14,14 @@
             <tr>
                 <th>Planta</th>
                 <th>Ilustração</th>
+                <th></th>
             </tr>
             @foreach (var irrPlanta in @Model.IrrigacaoPlantas!)
             {
                 <tr>
                     <td style="vertical-align: middle;">@irrPlanta.Planta!.Nome</td>
                     <td><img alt="planta" src="/img/plantas/@irrPlanta.RetornaIdPng()" style="width: 70px;" /></td>
-                    <td>@if(irrPlanta.Irrigacao!.Irrigado) { } else {<a class="btn btn-primary" asp-page="/IrrigacaoJardim/IrrigarPlanta" asp-route-id="@irrPlanta.PlantaId">Irrigar!</a>} </td>
+                    <td style="vertical-align: middle;">@if(irrPlanta.Irrigacao!.Irrigado) { <span class="badge badge-pri">Regado!</span> } else {<a class="btn btn-primary" asp-page="/IrrigacaoJardim/IrrigarPlanta" asp-route-id="@irrPlanta.PlantaId">Irrigar!</a>} </td>
                 </tr>
             }
         </table>
