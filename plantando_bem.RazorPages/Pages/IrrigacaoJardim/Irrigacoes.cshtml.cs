@@ -5,8 +5,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using plantando_bem.RazorPages.Areas.Identity.Data;
 using plantando_bem.RazorPages.Models;
+using plantando_bem.RazorPages.Models.Jardim;
 
-namespace plantando_bem.RazorPages.Pages.Irrigacao
+namespace plantando_bem.RazorPages.Pages.IrrigacaoJardim
 {
     [Authorize]
     public class Irrigacoes : PageModel
@@ -15,9 +16,8 @@ namespace plantando_bem.RazorPages.Pages.Irrigacao
         private readonly IdentityDataContext _context;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
-
         [BindProperty]
-        public List<UserPlantas>? UserPlantas { get; set; } = new();
+        public List<IrrigacaoPlanta>? IrrigacaoPlantas { get; set; }
         public Irrigacoes(ILogger<Irrigacoes> logger, 
                             IdentityDataContext context,
                             UserManager<IdentityUser> userManager,
@@ -27,6 +27,7 @@ namespace plantando_bem.RazorPages.Pages.Irrigacao
             _context = context;
             _userManager = userManager;
             _httpContextAccessor = httpContextAccessor;
+            
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -34,12 +35,23 @@ namespace plantando_bem.RazorPages.Pages.Irrigacao
             HttpContext httpCont = _httpContextAccessor.HttpContext!;
 
             var userNet = await _userManager.GetUserAsync(httpCont.User);
-            var user = await _context.User!.FirstAsync(t => t.IdNetUser == userNet!.Id);
-            UserPlantas = await _context.UserPlantas!
-                                        .Include(p => p.Planta)
-                                        .Where(u => u.UserId == user.Id)
-                                        .ToListAsync();
-                                        
+            var usuario = await _context.User!.FirstAsync(t => t.IdNetUser == userNet!.Id);
+            var strData = DateTime.Now.ToString("dd/MM/yyyy");
+
+            IrrigacaoPlantas = await _context.IrrigacaoPlantas!
+                                            .Include(o => o.Planta)
+                                            .Include(i => i.Irrigacao)
+                                            .Where(k => k.UserId == usuario.Id && k.Irrigacao!.Data == strData)
+                                            .ToListAsync();
+
+            for(int i=0;i<IrrigacaoPlantas.Count;i++) {
+                IrrigacaoPlantas[i].Planta!.IrrigacaoPlanta = null;
+                IrrigacaoPlantas[i].Planta!.UsuariosPlantas = null;
+                IrrigacaoPlantas[i].Usuario!.IrrigacaoPlantas = null;
+                IrrigacaoPlantas[i].Usuario!.UsuarioPlantas = null;
+                IrrigacaoPlantas[i].Irrigacao!.IrrigacaoPlantas = null;
+            }
+            
             return Page();
         }
     }

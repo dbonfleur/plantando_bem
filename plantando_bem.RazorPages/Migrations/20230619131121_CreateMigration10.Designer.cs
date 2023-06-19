@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using plantando_bem.RazorPages.Areas.Identity.Data;
 
@@ -10,9 +11,11 @@ using plantando_bem.RazorPages.Areas.Identity.Data;
 namespace plantando_bem.RazorPages.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-    partial class IdentityDataContextModelSnapshot : ModelSnapshot
+    [Migration("20230619131121_CreateMigration10")]
+    partial class CreateMigration10
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");

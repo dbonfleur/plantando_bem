@@ -7,11 +7,15 @@ namespace plantando_bem.RazorPages.Models.Jardim
 {
     public class IrrigacaoPlanta
     {
-        public int IrrigacaoId { get; set; }
+        public int? Id { get; set; }
+        public int? IrrigacaoId { get; set; }
         public Irrigacao? Irrigacao { get; set; }
-        public int PlantaId { get; set; }
+        public int? PlantaId { get; set; }
         public Planta? Planta { get; set; }
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
         public UserModel? Usuario { get; set; }
+        public string RetornaIdPng() {
+            return PlantaId + ".png";
+        }
     }
 }

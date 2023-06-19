@@ -120,6 +120,9 @@ namespace plantando_bem.RazorPages.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    
+                    
+
                     return RedirectToPage("/Calendario/CalendarioPrincipal");
                 }
                 else

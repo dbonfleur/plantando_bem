@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using plantando_bem.RazorPages.Areas.Identity.Data;
 using plantando_bem.RazorPages.Models;
+using plantando_bem.RazorPages.Models.Jardim;
 
 namespace plantando_bem.RazorPages.Pages.Jardim
 {
@@ -43,6 +44,21 @@ namespace plantando_bem.RazorPages.Pages.Jardim
  
             try {
                 await _context.AddAsync(userPlanta);
+                await _context.SaveChangesAsync();
+            } catch(DbUpdateException) {
+                return RedirectToPage("/Error");
+            }
+            var dataStr = DateTime.Now.ToString("dd/MM/yyyy");
+            var irrigacao = await _context.Irrigacao!.Where(p => p.Data == dataStr && p.Irrigado == false).FirstOrDefaultAsync();
+            
+            IrrigacaoPlanta irrigacaoPlanta = new () {
+                IrrigacaoId = irrigacao!.Id,
+                PlantaId = id,
+                UserId = user.Id
+            };
+
+            try {
+                await _context.AddAsync(irrigacaoPlanta);
                 await _context.SaveChangesAsync();
             } catch(DbUpdateException) {
                 return RedirectToPage("/Error");

@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\css\\calendar.css"
     },
     {
+      "Id": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\css\\irrigacao.css",
+      "PackagePath": "staticwebassets\\css\\irrigacao.css"
+    },
+    {
       "Id": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\css\\jardim.css",
       "PackagePath": "staticwebassets\\css\\jardim.css"
     },

@@ -37,8 +37,11 @@ namespace plantando_bem.RazorPages.Pages.Jardim
             var usuario = await _context.User!.FirstAsync(t => t.IdNetUser == userNet!.Id);
 
             var userPlanta = await _context.UserPlantas!.FirstAsync(p => p.PlantaId == id && p.UserId == usuario.Id);
+            var irrPlantas = await _context.IrrigacaoPlantas!.Where(l => l.PlantaId == id && l.UserId == usuario.Id).ToListAsync();
 
             try {
+                foreach(var irrPlanta in irrPlantas)
+                    _context.IrrigacaoPlantas!.Remove(irrPlanta);
                 _context.UserPlantas!.Remove(userPlanta);
                 await _context.SaveChangesAsync();
             } catch(DbException) {

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using plantando_bem.RazorPages.Areas.Identity.Data;
 using plantando_bem.RazorPages.Models;
+using plantando_bem.RazorPages.Models.Jardim;
 
 namespace plantando_bem.RazorPages.Pages.Calendario
 {
@@ -16,6 +17,8 @@ namespace plantando_bem.RazorPages.Pages.Calendario
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
         
+        public Irrigacao? IrrigacaoTrue { get; set; } = new();
+        public Irrigacao? IrrigacaoFalse { get; set; } = new();
         [BindProperty]
         public string? Estacao { get; set; }
         [BindProperty]
@@ -65,6 +68,61 @@ namespace plantando_bem.RazorPages.Pages.Calendario
                 Estacao = "Primavera";
             } else {
                 Estacao = "Verão";
+            }
+
+            var strData = DateTime.Now.ToString("dd/MM/yyyy");
+
+            IrrigacaoTrue = await _context.Irrigacao!.Where(p => p.Data == strData && p.Irrigado).FirstOrDefaultAsync();
+            IrrigacaoFalse = await _context.Irrigacao!.Where(p => p.Data == strData && !p.Irrigado).FirstOrDefaultAsync();
+            
+            int? idFalse, idTrue;
+            if(IrrigacaoTrue == null && IrrigacaoFalse == null) {
+
+                Irrigacao irrigacaoTrue = new() {
+                    Data = DateTime.Now.ToString("dd/MM/yyyy"),
+                    Irrigado = true
+                };
+
+                Irrigacao irrigacaoFalse = new() {
+                    Data = DateTime.Now.ToString("dd/MM/yyyy"),
+                    Irrigado = false
+                };
+
+                try {
+                    await _context.Irrigacao!.AddAsync(irrigacaoTrue);
+                    await _context.Irrigacao!.AddAsync(irrigacaoFalse);
+                    await _context.SaveChangesAsync();
+                } catch(DbUpdateException) {
+                    return RedirectToPage("/Calendario/CalendarioPrincipal");
+                }
+
+                idFalse = irrigacaoFalse.Id;
+                idTrue = irrigacaoTrue.Id;
+            } else {
+                idFalse = IrrigacaoFalse!.Id;
+                idTrue = IrrigacaoTrue!.Id;
+            }
+            
+            foreach(var userPlanta in UserPlantas) {
+                var plantaIrr = await _context.IrrigacaoPlantas!.Include(y => y.Irrigacao)
+                                                                .Where(p => p.PlantaId == userPlanta.PlantaId 
+                                                                && p.UserId == userPlanta.UserId 
+                                                                && (p.IrrigacaoId == idFalse || p.IrrigacaoId == idTrue)
+                                                                && p.Irrigacao!.Data!.Equals(strData))
+                                                                .FirstOrDefaultAsync();
+                if(plantaIrr == null) {
+                    IrrigacaoPlanta irrigacaoPlanta = new() {
+                        PlantaId = userPlanta.PlantaId,
+                        UserId = userPlanta.UserId,
+                        IrrigacaoId = idFalse
+                    };
+                    try {
+                        await _context.IrrigacaoPlantas!.AddAsync(irrigacaoPlanta);
+                        await _context.SaveChangesAsync();
+                    } catch (DbUpdateException) {
+                        return Page();
+                    }
+                }
             }
 
             return Page();

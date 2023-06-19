@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "4kWkHzmcAOqJ1dYumYHm80SdaiNWNO8vJZDa0BhbQNg=",
+  "Hash": "1HVDvRWJxAWXlGbuPKwNxcHv5d997gqFm1kQ0/Foey4=",
   "Source": "plantando_bem.RazorPages",
   "BasePath": "_content/plantando_bem.RazorPages",
   "Mode": "Default",
@@ -1103,6 +1103,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\calendar.css"
+    },
+    {
+      "Identity": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\css\\irrigacao.css",
+      "SourceId": "plantando_bem.RazorPages",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\",
+      "BasePath": "_content/plantando_bem.RazorPages",
+      "RelativePath": "css/irrigacao.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\irrigacao.css"
     },
     {
       "Identity": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\css\\jardim.css",

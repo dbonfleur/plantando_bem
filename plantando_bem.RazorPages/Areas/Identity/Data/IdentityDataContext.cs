@@ -22,6 +22,8 @@ public class IdentityDataContext : IdentityDbContext<IdentityUser>
     public DbSet<EpocaRegiao>? EpocaRegiao { get; set; }
     public DbSet<Planta>? Planta { get; set; }
     public DbSet<UserPlantas>? UserPlantas { get; set; }
+    public DbSet<Irrigacao>? Irrigacao { get; set; }
+    public DbSet<IrrigacaoPlanta>? IrrigacaoPlantas { get; set; }
     private readonly IConfiguration _configuration;
     public IdentityDataContext(DbContextOptions<IdentityDataContext> options, IConfiguration configuration)
         : base(options)
@@ -100,7 +102,7 @@ public class IdentityDataContext : IdentityDbContext<IdentityUser>
 
         builder.Entity<IrrigacaoPlanta>()
                 .ToTable("IrrigacaoPlanta")
-                .HasKey(up => new { up.IrrigacaoId, up.PlantaId });
+                .HasKey(k => k.Id);
                 
         builder.Entity<IrrigacaoPlanta>()
                 .HasOne(up => up.Planta)
