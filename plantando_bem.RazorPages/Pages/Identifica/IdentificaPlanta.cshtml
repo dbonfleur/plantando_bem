@@ -6,6 +6,39 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<div>
-    
-</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script>
+<link rel="stylesheet" href="~/css/identificaPlanta.css"/>
+
+<form method="post" enctype="multipart/form-data" id="myDropzone" class="dropzone">
+    <div class="fileinputs">
+        <input type="file" name="file" class="file"/>
+        <div class="fakefile">
+            
+        </div>
+    </div>
+    @* <button type="submit" class="btn btn-primary">Enviar</button> *@
+</form>
+
+<script>
+    Dropzone.options.myDropzone = {
+        paramName: "file",
+        maxFilesize: 2, // Tamanho máximo do arquivo em MB
+        acceptedFiles: "image/*", // Aceitar apenas arquivos de imagem
+        dictDefaultMessage: "Arraste e solte uma imagem aqui ou clique para selecionar",
+        dictInvalidFileType: "Tipo de arquivo inválido. Apenas imagens são permitidas.",
+        
+        autoProcessQueue: false, // Não iniciar o envio automaticamente
+
+        init: function () {
+            var myDropzone = this;
+
+            // Adicione um manipulador de evento para o evento de envio personalizado
+            this.element.querySelector("button[type=submit]").addEventListener("click", function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                myDropzone.processQueue(); // Inicie o envio dos arquivos
+            });
+        }
+    };
+</script>
