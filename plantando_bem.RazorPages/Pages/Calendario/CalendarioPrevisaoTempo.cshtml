@@ -36,29 +36,75 @@
             // Limpar conteúdo anterior
             weatherInfoContainer.empty();
 
+            var slcId = parseInt($(this).attr("id"));
+
+            var selectedDay0  = @(Json.Serialize(Model.PrevisaoTempo.Previsao!.PrevisaoDias![0]));
+            var selectedDay1  = @(Json.Serialize(Model.PrevisaoTempo.Previsao!.PrevisaoDias![1]));
+            var selectedDay2  = @(Json.Serialize(Model.PrevisaoTempo.Previsao!.PrevisaoDias![2]));
+            var selectedDay = null;
+
+            switch(slcId) {
+                case 0:
+                    selectedDay = selectedDay0;
+                    break;
+                case 1:
+                    selectedDay = selectedDay1;
+                    break;
+                case 2:
+                    selectedDay = selectedDay2;
+            }
+            
             // Obter informações da previsão do tempo para o dia selecionado
-            var selectedDay = @(Json.Serialize(Model.PrevisaoTempo.Previsao.PrevisaoDias[0])); // Use o índice correto para obter o dia correto
-            var hours = selectedDay.Horas;
+            @* var selectedPrevisao = @(Json.Serialize(Model.PrevisaoTempo.Previsao!)); // Use o índice correto para obter o dia correto
+            $.each(selectedPrevisao, function(index, slcPrev) {
+                if(index == slcId) {
+                    selectedDay = slcPrev;
+                    return false;
+                }
+            }); *@
+
+            var hours = selectedDay.horas;
 
             // Exibir informações do tempo para o dia selecionado
-            var weatherInfo = $("<div></div>").addClass("weather-info");
+            var weatherInfo = $("<div></div>").addClass("weather-info table-responsive");
             var dayLabel = $("<h3></h3>").text("Dia - " + selectedDay.Data);
             weatherInfo.append(dayLabel);
 
-            var table = $("<table></table>").addClass("weather-table");
-            var tableHead = $("<thead></thead>").html("<tr><th>Hora</th><th>Temperatura (°C)</th><th>Condição</th></tr>");
+            var table = $("<table></table>").addClass("table table-sm");
+
+            var trs = $("<tr></tr>").append("<th></th>");
+            for(var i=0; i<24; i++) {
+                if(i<10)
+                    trs.append("<th>0" + i + ":00");
+                else
+                    trs.append("<th>" + i + ":00");
+            }
+
+            var tableHead = $("<thead></thead>").html(trs);
             var tableBody = $("<tbody></tbody>");
 
-            for (var i = 0; i < 24; i++) {
+            var rowHumidade = $("<tr></tr>").append("<td>Humidade</td>");
+            var rowTempC = $("<tr></tr>").append("<td>Temperatura</td>");
+            var rowVelVen = $("<tr></tr>").append("<td>Km/h Vento</td>");
+            rowImgs = $("<tr></tr>");
+            rowImgs.append("<td></td>");
+            
+            for(var i = 0; i < 24; i++) {
                 var hour = hours[i];
 
-                var row = $("<tr></tr>");
-                var hourCell = $("<td></td>").text(hour.Tempo);
-                var tempCell = $("<td></td>").text(hour.TemperaturaEmC);
-                var conditionCell = $("<td></td>").text(hour.CondicaoTempo);
+                var tdHum = $("<td></td>").text(hour.humidade + "%").css("vertical-align", "middle");
+                var tdTempC = $("<td></td>").text(hour.temperaturaEmC + "Cº").css("vertical-align", "middle");
+                var tdVelVent = $("<td></td>").text(hour.velocVentoKmph).css("vertical-align", "middle");
 
-                row.append(hourCell, tempCell, conditionCell);
-                tableBody.append(row);
+                rowHumidade.append(tdHum);
+                rowTempC.append(tdTempC);
+                rowVelVen.append(tdVelVent);
+                
+                var img = $("<img>").attr("src", hour.condicaoTempo.icone).css("width", "30px");
+                var tdImg = $("<td></td>").append(img);
+                rowImgs.append(tdImg);
+
+                tableBody.append(rowHumidade, rowTempC, rowVelVen, rowImgs);
             }
 
             table.append(tableHead, tableBody);
