@@ -188,12 +188,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/GitHub/plantando_bem/plantando_bem.RazorPages/Pages/Identifica/AdicionaPlanta.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSWRlbnRpZmljYVxBZGljaW9uYVBsYW50YS5jc2h0bWw=
+[D:/GitHub/plantando_bem/plantando_bem.RazorPages/Pages/Identifica/IdentificaMinhasPlantas.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSWRlbnRpZmljYVxJZGVudGlmaWNhTWluaGFzUGxhbnRhcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/GitHub/plantando_bem/plantando_bem.RazorPages/Pages/Identifica/IdentificaPlanta.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSWRlbnRpZmljYVxJZGVudGlmaWNhUGxhbnRhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/GitHub/plantando_bem/plantando_bem.RazorPages/Pages/Identifica/IdentificaPlantaUsers.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSWRlbnRpZmljYVxJZGVudGlmaWNhUGxhbnRhVXNlcnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/GitHub/plantando_bem/plantando_bem.RazorPages/Pages/Index.cshtml]

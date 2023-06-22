@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using plantando_bem.RazorPages.Models;
+using plantando_bem.RazorPages.Models.Identifica;
 using plantando_bem.RazorPages.Models.Jardim;
 using plantando_bem.RazorPages.Models.Localidades;
 
@@ -24,6 +25,8 @@ public class IdentityDataContext : IdentityDbContext<IdentityUser>
     public DbSet<UserPlantas>? UserPlantas { get; set; }
     public DbSet<Irrigacao>? Irrigacao { get; set; }
     public DbSet<IrrigacaoPlanta>? IrrigacaoPlantas { get; set; }
+    public DbSet<PlantaIdentifica>? PlantaIdentifica { get; set; }
+    public DbSet<UserIdentificaPlanta>? UserIdentificaPlanta { get; set; }
     private readonly IConfiguration _configuration;
     public IdentityDataContext(DbContextOptions<IdentityDataContext> options, IConfiguration configuration)
         : base(options)
@@ -99,24 +102,36 @@ public class IdentityDataContext : IdentityDbContext<IdentityUser>
 
         builder.Entity<Irrigacao>().ToTable("Irrigacao").HasKey(k => k.Id);
         builder.Entity<Irrigacao>().Property(o => o.Id).ValueGeneratedOnAdd();
-
         builder.Entity<IrrigacaoPlanta>()
                 .ToTable("IrrigacaoPlanta")
-                .HasKey(k => k.Id);
-                
+                .HasKey(k => k.Id);      
         builder.Entity<IrrigacaoPlanta>()
                 .HasOne(up => up.Planta)
                 .WithMany(u => u.IrrigacaoPlanta)
                 .HasForeignKey(up => up.PlantaId);
-
         builder.Entity<IrrigacaoPlanta>()
                 .HasOne(up => up.Irrigacao)
                 .WithMany(u => u.IrrigacaoPlantas)
-                .HasForeignKey(up => up.IrrigacaoId);
-        
+                .HasForeignKey(up => up.IrrigacaoId);  
         builder.Entity<IrrigacaoPlanta>()
                 .HasOne(up => up.Usuario)
                 .WithMany(u => u.IrrigacaoPlantas)
                 .HasForeignKey(up => up.UserId);
+
+        builder.Entity<PlantaIdentifica>().ToTable("PlantaIdentifica").HasKey(k => k.Id);
+        builder.Entity<PlantaIdentifica>().Property(o => o.Id).ValueGeneratedOnAdd();
+        builder.Entity<UserIdentificaPlanta>()
+                .ToTable("UserIdentificaPlanta")
+                .HasKey(u => new { u.UserPostId, u.PlantaIdentificaId });      
+
+        builder.Entity<UserIdentificaPlanta>()
+                .HasOne(up => up.PlantaIdentifica)
+                .WithMany()
+                .HasForeignKey(up => up.PlantaIdentificaId);
+
+        builder.Entity<UserIdentificaPlanta>()
+                .HasOne(up => up.UserPost)
+                .WithMany()
+                .HasForeignKey(up => up.UserPostId);  
     }   
 }

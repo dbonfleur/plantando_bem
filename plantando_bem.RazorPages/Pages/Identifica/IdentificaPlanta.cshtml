@@ -1,34 +1,58 @@
 @page
 @model plantando_bem.RazorPages.Pages.Identifica.IdentificaPlanta
 @{
-    ViewData["Title"] = "IdentificaPlanta";
+    ViewData["Title"] = "Identificar Planta:";
 }
 
-<h1>@ViewData["Title"]</h1>
-
 <link rel="stylesheet" href="~/css/identificaPlanta.css"/>
+
+<table class="table table-borderless" style="padding-top: 15px;padding-bottom: 40px;">
+    <tr>
+        <td class="col-md-7">
+            <h2 style="color: green;">@ViewData["Title"]</h2>
+        </td>
+        <td class="col-md-3">
+            <a class="btn btn-success bottom-button" asp-page="/Identifica/IdentificaMinhasPlantas">Minhas Plantas Identificadas</a>
+        </td>
+        <td class="col-md-3">
+            <a class="btn btn-primary bottom-button" asp-page="/Identifica/IdentificaPlantaUsers">Identificar Plantas</a>
+        </td>
+    </tr>
+</table>
+
+@if (!string.IsNullOrEmpty(TempData["erroSalvar"]?.ToString())) {
+    <div class="alert alert-warning">@TempData["erroSalvar"]</div>
+}
+@if (!string.IsNullOrEmpty(TempData["erroImg"]?.ToString())) {
+    <div class="alert alert-warning">@TempData["erroImg"]</div>
+}
+@if (!string.IsNullOrEmpty(TempData["successImg"]?.ToString())) {
+    <div class="alert alert-success">@TempData["successImg"]</div>
+}
 
 <form method="post" enctype="multipart/form-data" id="myDropzone" class="modest">
     <div class="fileinputs">
         <input type="file" name="file" class="file"/>
         <div class="fakefile">
             <img id="imgIdent" src="~/img/enviaImagem.png"/>
+            <button id="btnSubmit" type="submit" class="w-50 btn btn-lg btn-primary bottom-button mrgBtn" style="margin-left: 220px;margin-top: 30px;" disabled>Enviar</button>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Enviar</button>
 </form>
 
 <script>
     function previewImage(event) {
         var input = event.target;
         var img = document.getElementById('imgIdent');
+        var btn = document.getElementById('btnSubmit');
         var reader = new FileReader();
 
          reader.onload = function() {
             img.src = reader.result;
-            img.style.width = "100%";
+            img.style.width = "auto";
             img.style.display = "block";
             img.style.margin = "0 auto";
+            btn.disabled = false;
         };
 
         reader.readAsDataURL(input.files[0]);
