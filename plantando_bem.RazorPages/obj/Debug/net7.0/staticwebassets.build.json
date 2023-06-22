@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "mIiQYck0PyMrnNnL+wyrWNdLX7MDRgGYYIa3YEDQw+Q=",
+  "Hash": "ZaAsWagR9FD/RjNJOf41bAyQJOAs4/RmAUSSki609O8=",
   "Source": "plantando_bem.RazorPages",
   "BasePath": "_content/plantando_bem.RazorPages",
   "Mode": "Default",
@@ -1222,6 +1222,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\img\\carregadaImagem.png",
+      "SourceId": "plantando_bem.RazorPages",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\",
+      "BasePath": "_content/plantando_bem.RazorPages",
+      "RelativePath": "img/carregadaImagem.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\carregadaImagem.png"
     },
     {
       "Identity": "D:\\GitHub\\plantando_bem\\plantando_bem.RazorPages\\wwwroot\\img\\carrot_branca.png",

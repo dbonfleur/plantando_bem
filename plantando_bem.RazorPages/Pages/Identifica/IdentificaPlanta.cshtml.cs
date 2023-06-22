@@ -18,24 +18,19 @@ namespace plantando_bem.RazorPages.Pages.Identifica
 
         public void OnGet()
         {
+            
         }
-
-        public async Task<IActionResult> OnPostAsync(List<IFormFile> files)
+        public async Task<IActionResult> OnPostAsync(IFormFile file)
         {
-            if (files != null && files.Count > 0)
-            {
-                var file = files[0]; // Assume apenas um arquivo
 
-                if (file.Length > 0)
+            if (file.Length > 0)
+            {
+                using (var memoryStream = new MemoryStream())
                 {
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        await file.CopyToAsync(memoryStream);
-                        IdentPlanta!.Imagem = memoryStream.ToArray();
-                        // Salve a imagem no banco de dados aqui
-                    }
+                    await file.CopyToAsync(memoryStream);
+                    IdentPlanta!.Imagem = memoryStream.ToArray();
+                    // Salve a imagem no banco de dados aqui
                 }
-                
             }
 
             // Se não houver arquivo enviado, retorne à página de upload
