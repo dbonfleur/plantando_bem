@@ -45,6 +45,9 @@
         var input = event.target;
         var img = document.getElementById('imgIdent');
         var btn = document.getElementById('btnSubmit');
+        var fle = document.getElementsByClassName("file");
+        fle[0].classList.remove("file");
+        
         var reader = new FileReader();
 
          reader.onload = function() {

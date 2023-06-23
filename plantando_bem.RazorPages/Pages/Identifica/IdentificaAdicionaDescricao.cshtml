@@ -1,0 +1,40 @@
+@page "{id:int}"
+@model plantando_bem.RazorPages.Pages.Identifica.IdentificaAdicionaDescricao
+@{
+    ViewData["Title"] = "Identifique a planta:";
+}
+
+<h2 style="color: green;">@ViewData["Title"]</h2>
+
+<div>
+    <form method="post">
+        <input type="hidden" value="@Model.UserIdentPlanta.PlantaIdentificaId" asp-for="@Model.UserIdentPlanta.PlantaIdentificaId">
+        <table class="table table-borderless">
+            <tr>
+                <td class="col-md-3"></td>
+                <td colspan="2">
+                    <img src="data:image/png;base64,@(Convert.ToBase64String(Model.UserIdentPlanta!.PlantaIdentifica!.Imagem!))" alt="Imagem da planta" class="imgsPlanta" style="padding-left: 20%;"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-3"></td>
+                <td>
+                    <div class="form-group">
+                        <label asp-for="UserIdentPlanta.PlantaIdentifica!.Descricao">Descrição</label>
+                        <textarea asp-for="UserIdentPlanta.PlantaIdentifica!.Descricao" class="form-control" style="height: 120px;width: 526px;"></textarea>
+                        <span asp-validation-for="UserIdentPlanta.PlantaIdentifica!.Descricao" class="text-dange"></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-3"></td>
+                <td>
+                    <div class="form-group"  style="padding-left: 20%;">
+                        <input type="submit" class="btn btn-success" value="Salvar Descrição"/>
+                        <a asp-page="/Identifica/IdentificaPlanta" class="btn btn-secondary">Cancelar</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
