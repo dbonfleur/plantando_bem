@@ -5,6 +5,7 @@ using plantando_bem.RazorPages.Models;
 using plantando_bem.RazorPages.Models.Identifica;
 using plantando_bem.RazorPages.Models.Jardim;
 using plantando_bem.RazorPages.Models.Localidades;
+using plantando_bem.RazorPages.Models.Praga;
 
 namespace plantando_bem.RazorPages.Areas.Identity.Data;
 
@@ -27,6 +28,7 @@ public class IdentityDataContext : IdentityDbContext<IdentityUser>
     public DbSet<IrrigacaoPlanta>? IrrigacaoPlantas { get; set; }
     public DbSet<PlantaIdentifica>? PlantaIdentifica { get; set; }
     public DbSet<UserIdentificaPlanta>? UserIdentificaPlanta { get; set; }
+    public DbSet<PragaModel>? Pragas { get; set; }
     private readonly IConfiguration _configuration;
     public IdentityDataContext(DbContextOptions<IdentityDataContext> options, IConfiguration configuration)
         : base(options)
@@ -132,6 +134,9 @@ public class IdentityDataContext : IdentityDbContext<IdentityUser>
         builder.Entity<UserIdentificaPlanta>()
                 .HasOne(up => up.UserPost)
                 .WithMany()
-                .HasForeignKey(up => up.UserPostId);  
+                .HasForeignKey(up => up.UserPostId);
+
+        builder.Entity<PragaModel>().ToTable("Praga").HasKey(k => k.Id);
+        builder.Entity<PragaModel>().Property(o => o.Id).ValueGeneratedOnAdd();  
     }   
 }

@@ -1,11 +1,29 @@
 @page
 @model plantando_bem.RazorPages.Pages.Pragas.InformacoesPragas
 @{
-    ViewData["Title"] = "Informacoes Pragas";
+    ViewData["Title"] = "Informacões Pragas:";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h1 style="color: rgb(206, 206, 0);">@ViewData["Title"]</h1>
 
 <div>
-    
+    <table class="table table-striped table-warning">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Solução</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var praga in Model.Pragas!)
+            {
+                <tr>
+                    <td>@praga.Nome</td>
+                    <td>@praga.Descricao</td>
+                    <td>@praga.Solucao</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
