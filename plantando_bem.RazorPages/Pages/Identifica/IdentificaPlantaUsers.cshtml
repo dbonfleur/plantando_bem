@@ -12,19 +12,17 @@
     {
         <table class="table table-borderless">
             <tr>
-                <td class="col-md-3"></td>
-                <td>
-                    <img src="data:image/png;base64,@(Convert.ToBase64String(plantas.PlantaIdentifica!.Imagem!))" alt="Imagem da planta" class="imgsPlanta" style="padding-left: 20%;"/>
+                <td style="text-align: center;">
+                    <img src="data:image/png;base64,@(Convert.ToBase64String(plantas.PlantaIdentifica!.Imagem!))" alt="Imagem da planta"/>
                 </td>
             </tr>
             <tr>
-                <td class="col-md-3"></td>
-                <td>
+                <td style="text-align: center;">
                     @if(plantas.PlantaIdentifica!.Descricao != null) {
                         @plantas.PlantaIdentifica!.Descricao
                     }
                     @if(plantas.PlantaIdentifica!.Descricao == null) {
-                        <a class="w-50 btn btn-lg btn-success bottom-button" asp-page="/Identifica/IdentificaAdicionaDescricao" asp-route-id="@plantas.PlantaIdentificaId" style="margin-left: 60px;">Ajudar a indentificar!</a>
+                        <a class="w-50 btn btn-lg btn-success bottom-button" asp-page="/Identifica/IdentificaAdicionaDescricao" asp-route-id="@plantas.PlantaIdentificaId">Ajudar a indentificar!</a>
                     }
                 </td>
             </tr>

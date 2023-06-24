@@ -14,11 +14,30 @@ input.file {
 	text-align: right;
 	opacity: 0;
 	z-index: 2;
-	width: 880px;
-	height: 593px;
+	width: 720px;
+	height: 485px;
 }
 
 .modest {
 	border: 0px;
-	padding: 40px 140px;
+	padding: 0px 255px;
+}
+
+.imgsPlanta {
+	width: 60%;
+}
+
+.my-custom-scrollbar {
+    position: relative;
+    height: 540px;
+    overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+    display: block;
+}
+
+.btnIdent {
+	margin-left: 190px;
+	margin-top: 30px;
 }

@@ -7,19 +7,22 @@
 <h2 style="color: green;">@ViewData["Title"]</h2>
 <link rel="stylesheet" href="~/css/identificaPlanta.css"/>
 
+@if (!string.IsNullOrEmpty(TempData["erroDeletar"]?.ToString())) {
+    <div class="alert alert-warning">@TempData["erroDeletar"]</div>
+}
+
 <div class="table-wrapper-scroll-y my-custom-scrollbar">
         @foreach (var plantas in Model.UserIdentPlantas!)
         {
             <table class="table table-borderless">
                 <tr>
-                    <td class="col-md-3"></td>
-                    <td class="align-middle">
-                        <img src="data:image/png;base64,@(Convert.ToBase64String(plantas.PlantaIdentifica!.Imagem!))" alt="Imagem da planta" class="imgsPlanta"  style="padding-left: 20%;"/>
+                    <td style="vertical-align: middle;text-align: center;">
+                        <img src="data:image/png;base64,@(Convert.ToBase64String(plantas.PlantaIdentifica!.Imagem!))" alt="Imagem da planta" class="imgsPlanta"/>
+                        <a class="btn btn-danger" asp-page="/Identifica/IdentificaRemoverPlanta" asp-route-id="@plantas.PlantaIdentificaId">Remover</a>
                     </td>
                 </tr>
                 <tr>
-                    <td class="col-md-3"></td>
-                    <td class="align-middle">
+                    <td style="text-align: center;">
                         @if(plantas.PlantaIdentifica!.Descricao != null) {
                             @plantas.PlantaIdentifica!.Descricao
                         }

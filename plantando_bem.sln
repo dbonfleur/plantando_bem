@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "plantando_bem.API", "plantando_bem.API\plantando_bem.API.csproj", "{D22881D5-7019-44A2-9966-AA076D7E3E06}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "plantando_bem.RazorPages", "plantando_bem.RazorPages\plantando_bem.RazorPages.csproj", "{A8E9DBF7-CC44-4330-8E68-C468EBA26910}"
 EndProject
 Global

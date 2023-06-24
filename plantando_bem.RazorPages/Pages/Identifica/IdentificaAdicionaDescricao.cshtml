@@ -11,15 +11,13 @@
         <input type="hidden" value="@Model.UserIdentPlanta.PlantaIdentificaId" asp-for="@Model.UserIdentPlanta.PlantaIdentificaId">
         <table class="table table-borderless">
             <tr>
-                <td class="col-md-3"></td>
-                <td colspan="2">
-                    <img src="data:image/png;base64,@(Convert.ToBase64String(Model.UserIdentPlanta!.PlantaIdentifica!.Imagem!))" alt="Imagem da planta" class="imgsPlanta" style="padding-left: 20%;"/>
+                <td style="text-align: center;">
+                    <img src="data:image/png;base64,@(Convert.ToBase64String(Model.UserIdentPlanta!.PlantaIdentifica!.Imagem!))" alt="Imagem da planta" class="imgsPlanta"/>
                 </td>
             </tr>
             <tr>
-                <td class="col-md-3"></td>
                 <td>
-                    <div class="form-group">
+                    <div class="form-group" style="margin-left: 28%;">
                         <label asp-for="UserIdentPlanta.PlantaIdentifica!.Descricao">Descrição</label>
                         <textarea asp-for="UserIdentPlanta.PlantaIdentifica!.Descricao" class="form-control" style="height: 120px;width: 526px;"></textarea>
                         <span asp-validation-for="UserIdentPlanta.PlantaIdentifica!.Descricao" class="text-dange"></span>
@@ -27,9 +25,8 @@
                 </td>
             </tr>
             <tr>
-                <td class="col-md-3"></td>
-                <td>
-                    <div class="form-group"  style="padding-left: 20%;">
+                <td style="text-align: center;">
+                    <div class="form-group">
                         <input type="submit" class="btn btn-success" value="Salvar Descrição"/>
                         <a asp-page="/Identifica/IdentificaPlanta" class="btn btn-secondary">Cancelar</a>
                     </div>
