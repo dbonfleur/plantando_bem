@@ -7,7 +7,7 @@ Para executar o projeto localmente, siga as etapas abaixo:
 2.	Clone este repositório para o seu ambiente local.
 3.	Navegue até o diretório raiz do projeto.
 4.	Execute o seguinte comando para construir e iniciar os contêineres do Docker:
-5.	docker-compose up --build
+5.	docker-compose up --build -d
 6.	Aguarde até que os contêineres sejam criados e inicializados com êxito.
 7.	Após a conclusão do processo, você poderá acessar o Plantando Bem em seu navegador web através do seguinte URL:
 8.	http://localhost:8080
