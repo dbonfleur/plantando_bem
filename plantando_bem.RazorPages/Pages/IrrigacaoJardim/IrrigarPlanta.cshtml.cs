@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,6 +12,7 @@ using plantando_bem.RazorPages.Areas.Identity.Data;
 
 namespace plantando_bem.RazorPages.Pages.IrrigacaoJardim
 {
+    [Authorize]
     public class IrrigarPlanta : PageModel
     {
         private readonly ILogger<IrrigarPlanta> _logger;

@@ -1,0 +1,8 @@
+version: '3.3'
+services:
+  plantando_bem:
+    build: ./plantando_bem.RazorPages
+    container_name: plantando_bem
+    restart: always
+    ports:
+      - 8080:80

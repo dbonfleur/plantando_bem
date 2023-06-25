@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -7,6 +8,7 @@ using plantando_bem.RazorPages.Models;
 
 namespace plantando_bem.RazorPages.Pages.Identifica
 {
+    [Authorize]
     public class IdentificaPlantaUsers : PageModel
     {
         private readonly ILogger<IdentificaPlantaUsers> _logger;

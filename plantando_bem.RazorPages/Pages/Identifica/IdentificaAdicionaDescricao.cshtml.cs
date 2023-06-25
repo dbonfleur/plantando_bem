@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using plantando_bem.RazorPages.Models;
 using plantando_bem.RazorPages.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace plantando_bem.RazorPages.Pages.Identifica
 {
+    [Authorize]
     public class IdentificaAdicionaDescricao : PageModel
     {
         private readonly ILogger<IdentificaAdicionaDescricao> _logger;
