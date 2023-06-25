@@ -14,21 +14,21 @@ Para executar o projeto localmente, siga as etapas abaixo:
 
 # Recursos Principais
 O Plantando Bem oferece os seguintes recursos principais:
-•	Catálogos de hortaliças, legumes e outras plantas, permitindo que os usuários pesquisem e encontrem informações detalhadas sobre cada planta.
-•	Jardim pessoal para os usuários, onde eles podem adicionar plantas e acompanhar o tempo necessário até a colheita.
-•	Calendário integrado para visualizar as datas de plantio, colheita e outros eventos relacionados ao jardim.
-•	Sistema de notificação de irrigação, que lembra os usuários quando é hora de regar suas plantas com base nas necessidades individuais de cada planta.
-•	Previsão do tempo de até 3 dias, fornecendo informações sobre as condições climáticas que podem afetar o cultivo das plantas.
-•	Informações sobre combate a pragas, oferecendo sugestões e soluções para lidar com possíveis problemas com insetos e doenças nas plantas.
-•	Sistema social de identificação de plantas por imagens, onde os usuários podem enviar fotos de plantas desconhecidas e receber respostas e sugestões de outros usuários.
+1. Catálogos de hortaliças, legumes e outras plantas, permitindo que os usuários pesquisem e encontrem informações detalhadas sobre cada planta.
+2. Jardim pessoal para os usuários, onde eles podem adicionar plantas e acompanhar o tempo necessário até a colheita.
+3. Calendário integrado para visualizar as datas de plantio, colheita e outros eventos relacionados ao jardim.
+4. Sistema de notificação de irrigação, que lembra os usuários quando é hora de regar suas plantas com base nas necessidades individuais de cada planta.
+5.	Previsão do tempo de até 3 dias, fornecendo informações sobre as condições climáticas que podem afetar o cultivo das plantas.
+6.	Informações sobre combate a pragas, oferecendo sugestões e soluções para lidar com possíveis problemas com insetos e doenças nas plantas.
+8.	Sistema social de identificação de plantas por imagens, onde os usuários podem enviar fotos de plantas desconhecidas e receber respostas e sugestões de outros usuários.
  
 # Tecnologias Utilizadas
 O projeto utiliza as seguintes tecnologias:
-•	ASP .NET com Razor Pages: Framework utilizado para construir a aplicação web.
-•	Identity: Sistema de autenticação e autorização fornecido pelo ASP .NET, permitindo que os usuários façam login, registrem-se e acessem recursos protegidos.
-•	API do IBGE: Integração com a API do Instituto Brasileiro de Geografia e Estatística, que fornece informações geográficas e dados relacionados a municípios, estados, etc.
-•	API do WeatherApi: Integração com uma API de previsão do tempo, que fornece informações meteorológicas atualizadas.
-•	Docker Compose: Utilizado para facilitar o processo de empacotamento e implantação do projeto, garantindo que todos os serviços e dependências estejam configurados corretamente.
+1.	ASP .NET com Razor Pages: Framework utilizado para construir a aplicação web.
+2.	Identity: Sistema de autenticação e autorização fornecido pelo ASP .NET, permitindo que os usuários façam login, registrem-se e acessem recursos protegidos.
+3.	API do IBGE: Integração com a API do Instituto Brasileiro de Geografia e Estatística, que fornece informações geográficas e dados relacionados a municípios, estados, etc.
+4.	API do WeatherApi: Integração com uma API de previsão do tempo, que fornece informações meteorológicas atualizadas.
+5.	Docker Compose: Utilizado para facilitar o processo de empacotamento e implantação do projeto, garantindo que todos os serviços e dependências estejam configurados corretamente.
 
 # Autor
 Plantando Bem é desenvolvido por Daniel Bonfleur, como trabalho final para matéria de Tecnologia e Sistemas de Desenvolvimento na faculdade UTFPR - MD.
